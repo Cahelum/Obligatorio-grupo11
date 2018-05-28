@@ -21,5 +21,8 @@ public class Empresa {
 		this.ruc = ruc;
 	}
 	
+	public void listarVeinteEmpresasConMasProductosHabilitados(){
+		
+	}
 	
 }
