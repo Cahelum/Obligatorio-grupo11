@@ -1,0 +1,5 @@
+INDEX VERSION 1.130+C:\Users\telematica\Desktop\Obligatorio grupo 11\.metadata\.plugins\org.eclipse.jdt.core
+1465273213.index
+2065448561.index
+2684549865.index
+1408832167.index
