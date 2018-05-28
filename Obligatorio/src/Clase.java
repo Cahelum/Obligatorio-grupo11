@@ -2,6 +2,7 @@
 public class Clase {
 	
 	private String name;
+    //prueba
 
 	public String getName() {
 		return name;
