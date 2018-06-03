@@ -6,12 +6,16 @@ public class Producto {
 	private String fantasyName;
 	
 	private String status;
-	
-	public Producto(String name, String fantasyName, String status) {
+
+
+    private int idProduct;
+
+    public Producto(String name, String fantasyName, String status, int idProduct) {
 		super();
 		this.name = name;
 		this.fantasyName = fantasyName;
 		this.status = status;
+        this.idProduct = idProduct;
 	}
 	
 	public String getName() {
@@ -37,5 +41,13 @@ public class Producto {
 	public void setStatus(String status) {
 		this.status = status;
 	}
+
+    public int getIdProduct() {
+        return idProduct;
+    }
+
+    public void setIdProduct(int idProduct) {
+        this.idProduct = idProduct;
+    }
 	
 }
