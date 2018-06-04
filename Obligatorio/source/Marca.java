@@ -1,8 +1,7 @@
-
-public class Clase {
+package source;
+public class Marca {
 	
 	private String name;
-    //prueba
 
 	public String getName() {
 		return name;

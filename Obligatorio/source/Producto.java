@@ -1,3 +1,5 @@
+package source;
+import nodoSimple.MyLinkedList;
 
 public class Producto {
 	
@@ -7,15 +9,29 @@ public class Producto {
 	
 	private String status;
 
-
     private int idProduct;
+	
+	private MyLinkedList<Rubro> rubros;
 
-    public Producto(String name, String fantasyName, String status, int idProduct) {
+	private Pais pais;
+
+	private Marca marca;
+
+	private Empresa empresa;
+	
+	private Clase clase;
+
+    public Producto(String name, String fantasyName, String status, int idProduct, Clase clase, Pais pais, Marca marca, Empresa empresa, MyLinkedList<Rubro> rubros) {
 		super();
 		this.name = name;
 		this.fantasyName = fantasyName;
 		this.status = status;
         this.idProduct = idProduct;
+        this.clase=clase;
+        this.pais=pais;
+        this.marca=marca;
+        this.empresa=empresa;
+        this.rubros=rubros;
 	}
 	
 	public String getName() {
