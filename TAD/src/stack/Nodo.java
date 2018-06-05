@@ -2,9 +2,9 @@ package stack;
 
 public class Nodo<T> {
 
-	private Nodo next;
+	private Nodo<T> next;
 	private T valor;
-	private Nodo before;
+	private Nodo<T> before;
 	
 	
 	public Nodo (T entero) {
@@ -16,12 +16,12 @@ public class Nodo<T> {
 	}
 
 
-	public Nodo getNext() {
+	public Nodo<T> getNext() {
 		return next;
 	}
 
 
-	public void setNext(Nodo next) {
+	public void setNext(Nodo<T> next) {
 		this.next = next;
 	}
 
@@ -36,12 +36,12 @@ public class Nodo<T> {
 	}
 
 
-	public Nodo getBefore() {
+	public Nodo<T> getBefore() {
 		return before;
 	}
 
 
-	public void setBefore(Nodo before) {
+	public void setBefore(Nodo<T> before) {
 		this.before = before;
 	}
 	
