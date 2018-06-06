@@ -4,6 +4,14 @@ public class Empresa {
 	private String name;
 	
 	private String ruc;
+	
+	private int nroProductos;
+
+	public Empresa(String name, String ruc) {
+		this.name=name;
+		this.ruc=ruc;
+		this.nroProductos=0;
+	}
 
 	public String getName() {
 		return name;
@@ -20,9 +28,14 @@ public class Empresa {
 	public void setRuc(String ruc) {
 		this.ruc = ruc;
 	}
-	
-	public void listarVeinteEmpresasConMasProductosHabilitados(){
-		
+
+	public int getNroProductos() {
+		return nroProductos;
 	}
+
+	public void setNroProductos(int nroProductos) {
+		this.nroProductos = nroProductos;
+	}
+	
 	
 }

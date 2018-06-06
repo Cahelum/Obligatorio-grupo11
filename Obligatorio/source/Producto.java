@@ -11,7 +11,7 @@ public class Producto {
 
     private int idProduct;
 	
-	private MyLinkedList<Rubro> rubros;
+	private Rubro rubro;
 
 	private Pais pais;
 
@@ -21,7 +21,7 @@ public class Producto {
 	
 	private Clase clase;
 
-    public Producto(String name, String fantasyName, String status, int idProduct, Clase clase, Pais pais, Marca marca, Empresa empresa, MyLinkedList<Rubro> rubros) {
+    public Producto(String name, String fantasyName, String status, int idProduct, Clase clase, Pais pais, Marca marca, Empresa empresa, Rubro rubro) {
 		super();
 		this.name = name;
 		this.fantasyName = fantasyName;
@@ -31,7 +31,7 @@ public class Producto {
         this.pais=pais;
         this.marca=marca;
         this.empresa=empresa;
-        this.rubros=rubros;
+        this.rubro=rubro;
 	}
 	
 	public String getName() {
