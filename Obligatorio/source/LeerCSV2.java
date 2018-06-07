@@ -32,7 +32,6 @@ public class LeerCSV2 {
             String ruc=line.getElementFrom(23);
             String rubro=line.getElementFrom(3);
             obligatorio.crearProductoSoloStrings (nombreProducto, nombreDeFantasia, status, idProduct, clase, pais, marca, empresa, ruc, rubro);
-            System.out.println(" ");
             }
     	scanner.close();   
 
