@@ -6,7 +6,7 @@ import java.io.IOException;
 import java.util.Scanner;
 import nodoSimple.MyLinkedList;
 
-public class LeerCSV {
+public class LeerCsv {
 	//https://www.mkyong.com/java/how-to-read-and-parse-csv-file-in-java/ nos fue de mucha utilidad para la creación de esta clase
     private static final char DEFAULT_SEPARATOR = ';';
     private static final char DEFAULT_QUOTE = '"';
