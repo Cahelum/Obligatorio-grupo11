@@ -5,7 +5,7 @@ import static org.junit.Assert.*;
 import org.junit.Test;
 
 import source.LeerCSV;
-import source.LeerCSV2;
+import source.LeerCSV;
 import source.Obligatorio;
 
 public class TestObligatorio {
@@ -23,7 +23,7 @@ public class TestObligatorio {
 	@Test
 	public void testLectura() {
 		Obligatorio obligatorio=new Obligatorio();
-		LeerCSV2.lectura(obligatorio);
+		LeerCSV.lectura(obligatorio);
 	}
 
 }

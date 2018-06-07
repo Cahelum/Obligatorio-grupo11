@@ -37,15 +37,15 @@ public class MyLinkedList<T> implements LinkedList<T> {
 		
 	
 
-	public void add(T entero) {
+	public void add(T elemento) {
 
 		if (first == null) {
 
-			first = new Nodo<T>(entero);
+			first = new Nodo<T>(elemento);
 
 		} else {
 
-			Nodo<T> another = new Nodo<T>(entero);
+			Nodo<T> another = new Nodo<T>(elemento);
 			Nodo<T> verNext = this.first;
 			Nodo<T> noNulo = null;
 
@@ -72,13 +72,13 @@ public class MyLinkedList<T> implements LinkedList<T> {
 		return contador;
 	}
 
-	public boolean search(T entero) {
+	public boolean search(T elemento) {
 
 		Nodo<T> verNext = first;
 		boolean v = false;
 		while (verNext != null) {
 
-			if (entero == verNext.getValor()) {
+			if (elemento == verNext.getValor()) {
 				v = true;
 			}
 
@@ -89,15 +89,15 @@ public class MyLinkedList<T> implements LinkedList<T> {
 		return v;
 	}
 
-	public T getElementFrom(int entero) {
+	public T getElementFrom(int coordenada) {
 
 		T resultado = null;
 		Nodo<T> verNext = first;
 
-		if (entero == 0) {
+		if (coordenada == 0) {
 			resultado = verNext.getValor();
 		} else {
-			for (int i = 0; i < entero; i++) {
+			for (int i = 0; i < coordenada; i++) {
 
 				verNext = verNext.getNext();
 
@@ -130,11 +130,11 @@ public class MyLinkedList<T> implements LinkedList<T> {
 
 	}
 
-	public void addFirst(T entero) {
+	public void addFirst(T elemento) {
 
 		Nodo<T> another = new Nodo<T>(first.getValor());
 		another.setNext(first.getNext());
-		first.setValor(entero);
+		first.setValor(elemento);
 		first.setNext(another);
 
 	}
