@@ -14,13 +14,13 @@ public class MyHashTable<K, T> implements HashTable<K, T> {
 	public void insertar(K clave, T valor) throws ElementoYaExistenteException {
 
 		int coord = 1;
-		coord = clave.hashCode() % hash.length;
+		coord = Math.abs(clave.hashCode()) % hash.length;
 		NodeH nodo = new NodeH<K, T>(clave, valor, false);
 
 		int cont = coord;
-
+        System.out.println(coord+"+++++++"+ clave);
 		while (hash[coord] != null && hash[coord].getEliminado() == false && cont < hash.length) {
-
+			 System.out.println(coord+"-------");
 			if (hash[coord].getClave().equals(clave) && hash[coord].getEliminado() == false) {
 				throw new ElementoYaExistenteException("este elemento ya fue ingresado");
 			}
@@ -52,7 +52,7 @@ public class MyHashTable<K, T> implements HashTable<K, T> {
 
 			for (int c = 0; c < aux.length; c++) {
 
-				int newCoord = aux[c].getClave().hashCode() % hash.length;
+				int newCoord = Math.abs(aux[c].getClave().hashCode()) % hash.length;
 
 				hash[newCoord] = aux[c];
 
@@ -66,7 +66,7 @@ public class MyHashTable<K, T> implements HashTable<K, T> {
 
 		boolean resultado = false;
 
-		int coord = clave.hashCode() % hash.length;
+		int coord = Math.abs(clave.hashCode()) % hash.length;
 
 		while (hash[coord] != null && coord < hash.length && resultado == false) {
 
@@ -86,7 +86,7 @@ public class MyHashTable<K, T> implements HashTable<K, T> {
 
 		boolean resultado = false;
 
-		int coord = clave.hashCode() % hash.length;
+		int coord = Math.abs(clave.hashCode()) % hash.length;
 
 		while (hash[coord] != null && coord < hash.length && resultado == false) {
 
@@ -118,7 +118,7 @@ public class MyHashTable<K, T> implements HashTable<K, T> {
 		boolean resultado = false;
 		T res=null;
 
-		int coord = clave.hashCode() % hash.length;
+		int coord = Math.abs(clave.hashCode()) % hash.length;
 
 		while (hash[coord] != null && coord < hash.length && resultado == false) {
 

@@ -1,34 +1,44 @@
 package source;
 import java.util.HashMap;
 
+import hash.ElementoYaExistenteException;
+import hash.HashTable;
+import hash.MyHashTable;
+
 public class Obligatorio {
 	
-    private HashMap<String,Pais> paises = new HashMap<>(); //Cambiar por hash
-    private HashMap<String,Clase> clases= new HashMap<>(); //Cambiar por hash
-    private HashMap<String,Marca> marcas= new HashMap<>(); //Cambiar por hash
-    private HashMap<String,Empresa> empresas= new HashMap<>(); //Cambiar por hash
-    private HashMap<String,Rubro> rubros= new HashMap<>(); //Cambiar por hash
+    private HashTable<String,Pais> paises = new MyHashTable(100);
+    private HashTable<String,Clase> clases= new MyHashTable<>(1000);
+    private HashTable<String,Marca> marcas= new MyHashTable<>(10000);
+    private HashTable<String,Empresa> empresas= new MyHashTable<>(10000);
+    private HashTable<String,Rubro> rubros= new MyHashTable<>(10);
     
     public void crearProductoSoloStrings(String name, String fantasyName, String status, String idProduct, String clase, String pais, String marca, String empresa, String ruc, String rubro) {
     	
     	int idProduct2= Integer.parseInt(idProduct);
-    	clases.putIfAbsent(clase,new Clase(clase));
-    	paises.putIfAbsent(pais, new Pais(pais));
-    	marcas.putIfAbsent(marca, new Marca(marca));
-    	empresas.putIfAbsent(empresa,new Empresa(empresa,ruc));
-    	rubros.putIfAbsent(rubro, new Rubro(rubro));
-    	crearProducto(name, fantasyName, status, idProduct2, clases.get(clase), paises.get(pais), marcas.get(marca), empresas.get(empresa), rubros.get(rubro));
+    	try {
+			clases.insertar(clase, new Clase(clase));
+			paises.insertar(pais, new Pais(pais));
+	    	marcas.insertar(marca, new Marca(marca));
+	    	empresas.insertar(empresa,new Empresa(empresa,ruc));
+	    	rubros.insertar(rubro, new Rubro(rubro));
+	    	
+		} catch (ElementoYaExistenteException e) {
+			System.out.println(e);
+			//e.printStackTrace();
+		}
+    	
+    	crearProducto(name, fantasyName, status, idProduct2, clases.obtener(clase), paises.obtener(pais), marcas.obtener(marca), empresas.obtener(empresa), rubros.obtener(rubro));
     	    	
     }
 
     public void crearProducto(String name, String fantasyName, String status, int idProduct, Clase clase, Pais pais, Marca marca, Empresa empresa, Rubro rubro) {
     	
     	Producto producto = new Producto(name, fantasyName, status, idProduct, clase, pais, marca, empresa, rubro);
-    	empresas.get(empresa.getName()).addProductoDeLaEmpresa(producto);
-    	marcas.get(marca.getName()).addProductoDeLaMarca(producto);
-    	paises.get(pais.getName()).agregarMarcasPorPais(marca);
-
-    	paises.get(pais.getName()).agregarProductosPorPais(producto);
+    	empresas.obtener(empresa.getName()).addProductoDeLaEmpresa(producto);
+    	marcas.obtener(marca.getName()).addProductoDeLaMarca(producto);
+    	paises.obtener(pais.getName()).agregarMarcasPorPais(marca);
+    	paises.obtener(pais.getName()).agregarProductosPorPais(producto);
     }
     
     

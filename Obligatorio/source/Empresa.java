@@ -50,6 +50,47 @@ public class Empresa {
 		productosDeLaEmpresa.add(productoDeLaEmpresa);
 	}
 	
+	/*@Override
+	public int hashCode() {
+
+		int sumASCII=0;
+		
+    	for (int x=0;x<name.length();x++) {
+    		
+    	  sumASCII=sumASCII+name.codePointAt(x);
+    		
+    	}
+    	
+    	
+    	
+    	return ((sumASCII/name.length()));
+		
+		
+	}*/
+	
+	@Override
+	public boolean equals(Object obj) {
+		boolean resultado=false;
+		
+		
+		if (obj instanceof Empresa) {
+			
+			if (getName().equals(((Empresa) obj).getName())) {
+				
+			resultado=true;
+			
+			}else {
+				resultado=false;
+			}
+			
+			
+			
+		}else {
+			resultado=false;
+		}
+		
+		return resultado;
+	}
 	
 	
 }
