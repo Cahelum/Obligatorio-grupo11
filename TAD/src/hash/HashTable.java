@@ -12,6 +12,6 @@ public interface HashTable<K,T>{
 	
 	public T obtener(K clave);
 	
-	
+	public void insertarFaltante(K clave, T valor);
 	
 }

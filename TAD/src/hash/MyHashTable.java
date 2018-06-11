@@ -18,13 +18,11 @@ public class MyHashTable<K, T> implements HashTable<K, T> {
 		NodeH nodo = new NodeH<K, T>(clave, valor, false);
 
 		int cont = coord;
-        System.out.println(coord+"+++++++"+ clave);
-		while (hash[coord] != null && hash[coord].getEliminado() == false && cont < hash.length) {
-			 System.out.println(coord+"-------");
-			if (hash[coord].getClave().equals(clave) && hash[coord].getEliminado() == false) {
+        while (hash[coord] != null && hash[coord].getEliminado() == false && cont < hash.length) {
+			 if (hash[coord].getClave().equals(clave) && hash[coord].getEliminado() == false) {
 				throw new ElementoYaExistenteException("este elemento ya fue ingresado");
+				
 			}
-
 			coord = FuncionColicion(coord);
 
 		}
@@ -114,29 +112,32 @@ public class MyHashTable<K, T> implements HashTable<K, T> {
 	}
 
 	public T obtener(K clave) {
-		
 		boolean resultado = false;
 		T res=null;
 
 		int coord = Math.abs(clave.hashCode()) % hash.length;
-
 		while (hash[coord] != null && coord < hash.length && resultado == false) {
-
 			if (hash[coord].getClave().equals(clave) && hash[coord].getEliminado()==false) {
-
 				resultado = true;
 
 			}else {
-			coord = FuncionColicion(coord);
+				coord = FuncionColicion(coord);
 			}
 
 		}
 		if(resultado==true) {
 			res=hash[coord].getValor();
-		}else {res=null;}
+		}else {
+			res=null;
+			}
 		
 
 		return res;
 	}
-
+	public void insertarFaltante(K clave, T valor) {
+		try {
+			insertar(clave, valor);
+		} catch (ElementoYaExistenteException e) {
+		}
+	}
 }
