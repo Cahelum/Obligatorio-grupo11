@@ -42,9 +42,9 @@ public class Pais {
 	}
     
     
-	/*@Override
+	@Override
 	public int hashCode() {
-
+        System.out.println("123456987kxjcxjocxv");
 		int sumASCII=0;
 		
     	for (int x=0;x<name.length();x++) {
@@ -53,12 +53,12 @@ public class Pais {
     		 
     	}
     	
-    	System.out.println("123456987kxjcxjocxv");
+    	
     	
     	return ((sumASCII/name.length()));
 		
 		
-	}*/
+	}
 	
 	@Override
 	public boolean equals(Object obj) {

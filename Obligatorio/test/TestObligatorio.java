@@ -24,5 +24,6 @@ public class TestObligatorio {
 		Obligatorio obligatorio=new Obligatorio();
 		LeerCsv.lectura(obligatorio);
 	}
+	
 
 }

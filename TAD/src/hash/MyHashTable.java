@@ -19,7 +19,7 @@ public class MyHashTable<K, T> implements HashTable<K, T> {
 
 		int cont = coord;
 		
-        while (hash[coord] != null && hash[coord].getEliminado() == false /*&& cont < hash.length*/) {
+        while (hash[coord] != null && hash[coord].getEliminado() == false) {
 			 if (hash[coord].getClave().equals(clave) && hash[coord].getEliminado() == false) {
 				throw new ElementoYaExistenteException("este elemento ya fue ingresado");
 				
@@ -29,23 +29,20 @@ public class MyHashTable<K, T> implements HashTable<K, T> {
             
 		}
 
-		if (cont < hash.length) {
+		
 
 			cantElementos++;
 			hash[coord] = nodo;
 
-		} else {
-			throw new ElementoYaExistenteException(
-					"la posicion original elegida a traves de la clave ya estaba ocupada y la funcion de colicion fallo en encontrar una posicion libre");
-		}
+		
 		
         double auxCantElementos=cantElementos;
         double auxHashL=hash.length;
     
         
 		if (auxCantElementos / auxHashL > 0.8) {
-			 System.out.println(auxCantElementos / auxHashL+"indice de ocupacion ------"+cantElementos);	
-		System.out.println("agrando"+hash.length+"inicio");
+			 //System.out.println(auxCantElementos / auxHashL+"indice de ocupacion ------"+cantElementos);	
+	    	//System.out.println("agrando"+hash.length+"inicio");
 
 			aux = new NodeH[(hash.length)];
 
@@ -67,7 +64,7 @@ public class MyHashTable<K, T> implements HashTable<K, T> {
 				
 
 			}
-			System.out.println("agrando"+hash.length+"final");
+			//System.out.println("agrando"+hash.length+"final");
 
 		}
 

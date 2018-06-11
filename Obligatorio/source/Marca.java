@@ -29,7 +29,7 @@ public class Marca {
 		productoDeLaMarca.add(producto);
 	}
 	
-/*	@Override
+    @Override
 	public int hashCode() {
 
 		int sumASCII=0;
@@ -45,7 +45,7 @@ public class Marca {
     	return ((sumASCII/name.length()));
 		
 		
-	}*/
+	}
 	
 	@Override
 	public boolean equals(Object obj) {
