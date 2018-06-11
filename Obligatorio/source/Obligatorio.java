@@ -8,14 +8,15 @@ import hash.MyHashTable;
 public class Obligatorio {
 	
     private HashTable<String,Pais> paises = new MyHashTable(100);
-    private HashTable<String,Clase> clases= new MyHashTable<>(1000);
+    private HashTable<String,Clase> clases= new MyHashTable<>(256);
     private HashTable<String,Marca> marcas= new MyHashTable<>(10000);
     private HashTable<String,Empresa> empresas= new MyHashTable<>(10000);
-    private HashTable<String,Rubro> rubros= new MyHashTable<>(10);
+    private HashTable<String,Rubro> rubros= new MyHashTable<>(11);
     
     public void crearProductoSoloStrings(String name, String fantasyName, String status, String idProduct, String clase, String pais, String marca, String empresa, String ruc, String rubro) {
     	
     	int idProduct2= Integer.parseInt(idProduct);
+    	//System.out.println("creando clase");
 		clases.insertarFaltante(clase, new Clase(clase));
 		paises.insertarFaltante(pais, new Pais(pais));
     	marcas.insertarFaltante(marca, new Marca(marca));
