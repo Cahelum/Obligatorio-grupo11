@@ -2,15 +2,13 @@ package source;
 
 import nodoSimple.MyLinkedList;
 
-public class Empresa {
+public class Empresa implements Comparable<Empresa>{
 	
 	private String name;
 	
 	private String ruc;
 	
 	private MyLinkedList<String> productosDeLaEmpresa;
-	
-	private int nroProductos;
 
 	public Empresa(String name, String ruc) {
 		this.name=name;
@@ -32,14 +30,6 @@ public class Empresa {
 
 	public void setRuc(String ruc) {
 		this.ruc = ruc;
-	}
-
-	public int getNroProductos() {
-		return nroProductos;
-	}
-
-	public void setNroProductos(int nroProductos) {
-		this.nroProductos = nroProductos;
 	}
 
 	public MyLinkedList<String> getProductosDeLaEmpresa() {
@@ -90,6 +80,14 @@ public class Empresa {
 		}
 		
 		return resultado;
+	}
+
+	@Override
+	public int compareTo(Empresa o) {
+		Integer este = Integer.valueOf(this.getProductosDeLaEmpresa().size());
+		Integer otro=Integer.valueOf(o.getProductosDeLaEmpresa().size());
+		return este.compareTo(otro);
+	
 	}
 	
 	

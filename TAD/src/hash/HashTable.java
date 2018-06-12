@@ -1,5 +1,7 @@
 package hash;
 
+import java.util.Iterator;
+
 public interface HashTable<K,T>{
 	
 	
@@ -15,5 +17,6 @@ public interface HashTable<K,T>{
 	public void insertarFaltante(K clave, T valor);
 	
 	public int size();
-	
+		
+	public Iterator<T> iterator();
 }

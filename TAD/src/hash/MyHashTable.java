@@ -18,33 +18,28 @@ public class MyHashTable<K, T> implements HashTable<K, T>, Iterable<T> {
 		int coord = 1;
 		coord = Math.abs(clave.hashCode()) % hash.length;
 		NodeH nodo = new NodeH<K, T>(clave, valor, false);
-
 		int cont = coord;
-		
-        while (hash[coord] != null && hash[coord].getEliminado() == false) {
-			 if (hash[coord].getClave().equals(clave) && hash[coord].getEliminado() == false) {
+
+		while (hash[coord] != null && hash[coord].getEliminado() == false) {
+			if (hash[coord].getClave().equals(clave) && hash[coord].getEliminado() == false) {
 				throw new ElementoYaExistenteException("este elemento ya fue ingresado");
-				
+
 			}
-			
+
 			coord = FuncionColicion(coord);
-            
+
 		}
 
-		
+		cantElementos++;
+		hash[coord] = nodo;
 
-			cantElementos++;
-			hash[coord] = nodo;
+		double auxCantElementos = cantElementos;
+		double auxHashL = hash.length;
 
-		
-		
-        double auxCantElementos=cantElementos;
-        double auxHashL=hash.length;
-    
-        
 		if (auxCantElementos / auxHashL > 0.8) {
-			 //System.out.println(auxCantElementos / auxHashL+"indice de ocupacion ------"+cantElementos);	
-	    	//System.out.println("agrando"+hash.length+"inicio");
+			// System.out.println(auxCantElementos / auxHashL+"indice de ocupacion
+			// ------"+cantElementos);
+			// System.out.println("agrando"+hash.length+"inicio");
 
 			aux = new NodeH[(hash.length)];
 
@@ -56,17 +51,14 @@ public class MyHashTable<K, T> implements HashTable<K, T>, Iterable<T> {
 			hash = new NodeH[(int) (hash.length * 1.5)];
 
 			for (int c = 0; c < aux.length; c++) {
-				
-				if(aux[c]!=null) {
-					int newCoord = Math.abs(aux[c].getClave().hashCode()) % hash.length;
-				    hash[newCoord] = aux[c];
-				}
-				
 
-				
+				if (aux[c] != null) {
+					int newCoord = Math.abs(aux[c].getClave().hashCode()) % hash.length;
+					hash[newCoord] = aux[c];
+				}
 
 			}
-			//System.out.println("agrando"+hash.length+"final");
+			// System.out.println("agrando"+hash.length+"final");
 
 		}
 
@@ -104,27 +96,27 @@ public class MyHashTable<K, T> implements HashTable<K, T>, Iterable<T> {
 
 				resultado = true;
 
-			}else {
-			coord = FuncionColicion(coord);
+			} else {
+				coord = FuncionColicion(coord);
 			}
 
 		}
-		if(resultado==true) {
+		if (resultado == true) {
 			hash[coord].setEliminado(true);
 		}
 
 	}
 
 	public int FuncionColicion(int coord) {
-		int funcion=0;
-		
-		if (coord<hash.length-1) {
-			
+		int funcion = 0;
+
+		if (coord < hash.length - 1) {
+
 			funcion = coord + 1;
-		}else {
-			
-			funcion=0;
-			
+		} else {
+
+			funcion = 0;
+
 		}
 		return funcion;
 
@@ -132,68 +124,61 @@ public class MyHashTable<K, T> implements HashTable<K, T>, Iterable<T> {
 
 	public T obtener(K clave) {
 		boolean resultado = false;
-		T res=null;
+		T res = null;
 
 		int coord = Math.abs(clave.hashCode()) % hash.length;
 		while (hash[coord] != null && coord < hash.length && resultado == false) {
-			if (hash[coord].getClave().equals(clave) && hash[coord].getEliminado()==false) {
+			if (hash[coord].getClave().equals(clave) && hash[coord].getEliminado() == false) {
 				resultado = true;
 
-			}else {
+			} else {
 				coord = FuncionColicion(coord);
 			}
 
 		}
-		if(resultado==true) {
-			res=hash[coord].getValor();
-		}else {
-			res=null;
-			}
-		
+		if (resultado == true) {
+			res = hash[coord].getValor();
+		} else {
+			res = null;
+		}
 
 		return res;
 	}
+
 	public void insertarFaltante(K clave, T valor) {
 		try {
 			insertar(clave, valor);
 		} catch (ElementoYaExistenteException e) {
-		
+
 		}
 	}
-	
-	
+
 	public int size() {
 		return hash.length;
 	}
-	
+
 	public Iterator<T> iterator() {
-		final MyHashTable<K, T> hashTable= this;
-	    return new Iterator<T>() {
-	        final NodeH<K,T> firstNode = hash[0];
-	        final int size= hash.length;
-	        NodeH<K,T> currentNode = null;
-	        @Override
-	        public boolean hasNext() {
-	            if (size==0||currentNode.equals(hash[size-1])) {
-	                return false;
-	            } else {
-	            	return true;
-	            }
-	        }
-	        @Override
-	        public T next() {
-	            if (size()==0){
-	                throw new NoSuchElementException("Lista vacia");
-	            } else if (currentNode == null){
-	                this.currentNode = firstNode;
-	                return currentNode.data;
-	            } else if (currentNode.nextNode == null) {
-	                throw new NoSuchElementException();
-	            }
-	            this.currentNode = currentNode.nextNode;
-	            return currentNode.data;
-	        }
-	    };
+		Iterator<T> iterator= new Iterator<T>() {
+			private int indexActual=0;
+			private int elementos= 1;
+			
+			@Override
+			public boolean hasNext() {
+				return elementos <  cantElementos;
+			}
+			
+			@Override
+			public T next() {
+				while(hash[indexActual]==null) {
+					indexActual++;
+				}
+				elementos++;
+				T valorDelNodo= hash[indexActual].getValor();
+				
+				return valorDelNodo;
+			}
+		};
+		return iterator;
 	}
-	
+
 }

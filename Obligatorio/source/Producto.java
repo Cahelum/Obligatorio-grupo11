@@ -1,16 +1,17 @@
 package source;
-import nodoSimple.MyLinkedList;
 
 public class Producto {
-	
-	private String name;
-	
-	private String fantasyName;
-	
-	private String status;
 
-    private int idProduct;
+	private String name;
+
+	private String fantasyName;
+
+	private String status;
 	
+	private String nroHab;
+
+	private int idProduct;
+
 	private Rubro rubro;
 
 	private Pais pais;
@@ -18,22 +19,24 @@ public class Producto {
 	private Marca marca;
 
 	private Empresa empresa;
-	
+
 	private Clase clase;
 
-    public Producto(String name, String fantasyName, String status, int idProduct, Clase clase, Pais pais, Marca marca, Empresa empresa, Rubro rubro) {
-		super();
+	public Producto(String name, String fantasyName, String status, int idProduct, Clase clase, Pais pais, Marca marca,
+			Empresa empresa, Rubro rubro, String nroHab) {
+		
 		this.name = name;
 		this.fantasyName = fantasyName;
 		this.status = status;
-        this.idProduct = idProduct;
-        this.clase=clase;
-        this.pais=pais;
-        this.marca=marca;
-        this.empresa=empresa;
-        this.rubro=rubro;
+		this.idProduct = idProduct;
+		this.clase = clase;
+		this.pais = pais;
+		this.marca = marca;
+		this.empresa = empresa;
+		this.rubro = rubro;
+		this.nroHab=nroHab;
 	}
-	
+
 	public String getName() {
 		return name;
 	}
@@ -58,12 +61,60 @@ public class Producto {
 		this.status = status;
 	}
 
-    public int getIdProduct() {
-        return idProduct;
-    }
+	public int getIdProduct() {
+		return idProduct;
+	}
 
-    public void setIdProduct(int idProduct) {
-        this.idProduct = idProduct;
-    }
-	
+	public void setIdProduct(int idProduct) {
+		this.idProduct = idProduct;
+	}
+
+	public String getNroHab() {
+		return nroHab;
+	}
+
+	public void setNroHab(String nroHab) {
+		this.nroHab = nroHab;
+	}
+
+	public Rubro getRubro() {
+		return rubro;
+	}
+
+	public void setRubro(Rubro rubro) {
+		this.rubro = rubro;
+	}
+
+	public Pais getPais() {
+		return pais;
+	}
+
+	public void setPais(Pais pais) {
+		this.pais = pais;
+	}
+
+	public Marca getMarca() {
+		return marca;
+	}
+
+	public void setMarca(Marca marca) {
+		this.marca = marca;
+	}
+
+	public Empresa getEmpresa() {
+		return empresa;
+	}
+
+	public void setEmpresa(Empresa empresa) {
+		this.empresa = empresa;
+	}
+
+	public Clase getClase() {
+		return clase;
+	}
+
+	public void setClase(Clase clase) {
+		this.clase = clase;
+	}
+
 }
