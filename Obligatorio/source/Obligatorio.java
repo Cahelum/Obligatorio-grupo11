@@ -5,10 +5,11 @@ import hash.HashTable;
 import hash.MyHashTable;
 import nodoSimple.LinkedList;
 import nodoSimple.MyLinkedList;
+import ordenamiento.AlgoritmoOrdenamiento;
+import ordenamiento.MyQuickSort;
 
 public class Obligatorio {
 
-	private LinkedList<Empresa> reporte1= new MyLinkedList<>();
 	private HashTable<String, Pais> paises = new MyHashTable<>(100);
 	private HashTable<String, Clase> clases = new MyHashTable<>(1000);
 	private HashTable<String, Marca> marcas = new MyHashTable<>(10000);
@@ -42,11 +43,15 @@ public class Obligatorio {
 	public void reporte20EmpresasConMasProductosHabilitados(){
 		int i=0;
 		Iterator<Empresa> itr = empresas.iterator();
+		Empresa[] reporte1= new Empresa[empresas.getCantElementos()];
 		while(itr.hasNext()) {
 	         Empresa empresa = itr.next();
-	         reporte1.add(empresa);
-	      }
-		
+	         reporte1[i]=empresa;
+	         i=i++;
+	         }
+		AlgoritmoOrdenamiento<Empresa> quicksort= new MyQuickSort<>();
+		reporte1= quicksort.order(reporte1);
+		System.out.println(reporte1[0].getName());
 	}
 	
 }

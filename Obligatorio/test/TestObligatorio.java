@@ -24,6 +24,11 @@ public class TestObligatorio {
 		Obligatorio obligatorio=new Obligatorio();
 		LeerCsv.lectura(obligatorio);
 	}
-	
+	@Test
+	public void testReporte1() {
+		Obligatorio obligatorio=new Obligatorio();
+		LeerCsv.lectura(obligatorio);
+		obligatorio.reporte20EmpresasConMasProductosHabilitados();
+	}
 
 }

@@ -19,4 +19,6 @@ public interface HashTable<K,T>{
 	public int size();
 		
 	public Iterator<T> iterator();
+	
+	public int getCantElementos();
 }

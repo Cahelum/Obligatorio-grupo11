@@ -156,6 +156,10 @@ public class MyHashTable<K, T> implements HashTable<K, T>, Iterable<T> {
 	public int size() {
 		return hash.length;
 	}
+	
+	public int getCantElementos() {
+		return cantElementos;
+	}
 
 	public Iterator<T> iterator() {
 		Iterator<T> iterator= new Iterator<T>() {
