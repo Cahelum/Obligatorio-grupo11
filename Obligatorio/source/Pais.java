@@ -7,13 +7,12 @@ public class Pais {
 
     private String name;
     
-    private HashMap<String,Marca> marcasPorPais; //cambiar por nuestro hash
     
-    private MyLinkedList<Producto> productosPorPais;
+    
+    private MyLinkedList<String> productosPorPais;
 
     public Pais(String name) {
         this.name = name;
-        this.marcasPorPais=new HashMap<>();//arreglar
         this.productosPorPais=new MyLinkedList<>();
     }
 
@@ -25,26 +24,18 @@ public class Pais {
         this.name = name;
     }
 
-	public HashMap<String,Marca> getMarcasPorPais() {
-		return marcasPorPais;
-	}
-
-	public void agregarMarcasPorPais(Marca marca) {
-		this.marcasPorPais.putIfAbsent(marca.getName(), marca);
-	}
-
-	public MyLinkedList<Producto> getProductosPorPais() {
+	public MyLinkedList<String> getProductosPorPais() {
 		return productosPorPais;
 	}
 
-	public void agregarProductosPorPais(Producto producto) {
-		this.productosPorPais.add(producto);
+	public void agregarProductosPorPais(String producto) {
+		this.productosPorPais.add(producto);// esta clave no esta completa
 	}
     
     
 	@Override
 	public int hashCode() {
-        System.out.println("123456987kxjcxjocxv");
+        
 		int sumASCII=0;
 		
     	for (int x=0;x<name.length();x++) {

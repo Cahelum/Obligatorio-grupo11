@@ -6,7 +6,7 @@ public class Marca {
 	
 	private String name;
 	
-	private MyLinkedList<Producto> productoDeLaMarca;
+	private MyLinkedList<String> productoDeLaMarca;
 	
 	public Marca(String name) {
 		this.name = name;
@@ -21,11 +21,11 @@ public class Marca {
 		this.name = name;
 	}
 
-	public MyLinkedList<Producto> getProductoDeLaMarca() {
+	public MyLinkedList<String> getProductoDeLaMarca() {
 		return productoDeLaMarca;
 	}
 
-	public void addProductoDeLaMarca(Producto producto) {
+	public void addProductoDeLaMarca(String producto) {
 		productoDeLaMarca.add(producto);
 	}
 	
@@ -40,7 +40,7 @@ public class Marca {
     		 
     	}
     	
-    	System.out.println("123456987kxjcxjocxv");
+    	
     	
     	return ((sumASCII/name.length()));
 		

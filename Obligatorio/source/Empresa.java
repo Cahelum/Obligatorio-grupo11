@@ -8,7 +8,7 @@ public class Empresa {
 	
 	private String ruc;
 	
-	private MyLinkedList<Producto> productosDeLaEmpresa;
+	private MyLinkedList<String> productosDeLaEmpresa;
 	
 	private int nroProductos;
 
@@ -42,11 +42,11 @@ public class Empresa {
 		this.nroProductos = nroProductos;
 	}
 
-	public MyLinkedList<Producto> getProductosDeLaEmpresa() {
+	public MyLinkedList<String> getProductosDeLaEmpresa() {
 		return productosDeLaEmpresa;
 	}
 
-	public void addProductoDeLaEmpresa(Producto productoDeLaEmpresa) {
+	public void addProductoDeLaEmpresa(String productoDeLaEmpresa) {
 		productosDeLaEmpresa.add(productoDeLaEmpresa);
 	}
 	

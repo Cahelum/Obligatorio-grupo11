@@ -8,10 +8,11 @@ import hash.MyHashTable;
 public class Obligatorio {
 	
     private HashTable<String,Pais> paises = new MyHashTable(100);
-    private HashTable<String,Clase> clases= new MyHashTable<>(256);
+    private HashTable<String,Clase> clases= new MyHashTable<>(1000);
     private HashTable<String,Marca> marcas= new MyHashTable<>(10000);
     private HashTable<String,Empresa> empresas= new MyHashTable<>(10000);
     private HashTable<String,Rubro> rubros= new MyHashTable<>(11);
+    private HashTable<String , Producto> productos=new MyHashTable<>(70000);
     
     public void crearProductoSoloStrings(String name, String fantasyName, String status, String idProduct, String clase, String pais, String marca, String empresa, String ruc, String rubro) {
     	
@@ -27,12 +28,14 @@ public class Obligatorio {
 
     public void crearProducto(String name, String fantasyName, String status, int idProduct, Clase clase, Pais pais, Marca marca, Empresa empresa, Rubro rubro) {
     	Producto producto = new Producto(name, fantasyName, status, idProduct, clase, pais, marca, empresa, rubro);
+    	productos.insertarFaltante(producto.getIdProduct()+producto.getName(), producto);//esta clave no esta completa
+    	if (producto.getStatus().equals("HABILITADO")) {
     	Empresa prueba1= empresas.obtener(empresa.getName());
-    	prueba1.addProductoDeLaEmpresa(producto);
+    	prueba1.addProductoDeLaEmpresa(producto.getIdProduct()+producto.getName());//clave incompleta	
+    	}
     	Marca prueba= marcas.obtener(marca.getName());
-    	prueba.addProductoDeLaMarca(producto);
-    	paises.obtener(pais.getName()).agregarMarcasPorPais(marca);
-    	paises.obtener(pais.getName()).agregarProductosPorPais(producto);
+    	prueba.addProductoDeLaMarca(producto.getIdProduct()+producto.getName());//clave incompleta
+    	paises.obtener(pais.getName()).agregarProductosPorPais(producto.getIdProduct()+producto.getName());//clave incompleta
     }
     
     
