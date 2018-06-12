@@ -5,7 +5,7 @@ import java.util.Iterator;
 public class MyHashTable<K, T> implements HashTable<K, T>, Iterable<T> {
 	NodeH<K, T>[] aux;
 	NodeH<K, T>[] hash;
-	int cantElementos;
+	int cantElementos=0;
 
 	public MyHashTable(int arrayLenght) {
 
