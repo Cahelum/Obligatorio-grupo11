@@ -158,4 +158,12 @@ public class MyHashTable<K, T> implements HashTable<K, T> {
 		
 		}
 	}
+	
+	
+	public int size() {
+		return hash.length;
+	}
+	
+	
+	
 }

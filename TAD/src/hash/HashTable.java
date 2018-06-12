@@ -14,4 +14,6 @@ public interface HashTable<K,T>{
 	
 	public void insertarFaltante(K clave, T valor);
 	
+	public int size();
+	
 }

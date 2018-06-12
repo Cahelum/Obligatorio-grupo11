@@ -1,5 +1,7 @@
 package TestHash;
 
+
+
 public class Pais {
 
 	private String name;
@@ -23,7 +25,7 @@ public class Pais {
 
 	@Override
 	public int hashCode() {
-		System.out.println("123456987kxjcxjocxv");
+		
 		int sumASCII = 0;
 
 		for (int x = 0; x < name.length(); x++) {
@@ -34,5 +36,29 @@ public class Pais {
 
 		return ((sumASCII / name.length()));
 
+	}
+	
+	@Override
+	public boolean equals(Object obj) {
+		boolean resultado=false;
+		
+		
+		if (obj instanceof Pais) {
+			
+			if (getName().equals(((Pais) obj).getName())) {
+				
+			resultado=true;
+			
+			}else {
+				resultado=false;
+			}
+			
+			
+			
+		}else {
+			resultado=false;
+		}
+		
+		return resultado;
 	}
 }

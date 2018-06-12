@@ -13,7 +13,7 @@ public class Pais {
 
     public Pais(String name) {
         this.name = name;
-        this.marcasPorPais=new HashMap<>();
+        this.marcasPorPais=new HashMap<>();//arreglar
         this.productosPorPais=new MyLinkedList<>();
     }
 
