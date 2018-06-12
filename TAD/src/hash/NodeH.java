@@ -34,7 +34,30 @@ public class NodeH<K,T> {
 	public void setValor(T valor) {
 		this.valor = valor;
 	}
-	
+
+	@Override
+	public boolean equals(Object obj) {
+		boolean resultado=false;
+		
+		
+		if (obj instanceof NodeH) {
+			if(getEliminado()==false) {
+				if (getClave().equals(((NodeH) obj).getClave())) {
+				
+					resultado=true;
+			
+				}else {
+					resultado=false;
+				}
+			
+			}
+			
+		}else {
+			resultado=false;
+		}
+		
+		return resultado;
+	}
 	
 
 }

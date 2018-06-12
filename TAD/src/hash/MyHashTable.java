@@ -1,6 +1,8 @@
 package hash;
 
-public class MyHashTable<K, T> implements HashTable<K, T> {
+import java.util.Iterator;
+
+public class MyHashTable<K, T> implements HashTable<K, T>, Iterable<T> {
 	NodeH<K, T>[] aux;
 	NodeH<K, T>[] hash;
 	int cantElementos;
@@ -164,6 +166,34 @@ public class MyHashTable<K, T> implements HashTable<K, T> {
 		return hash.length;
 	}
 	
-	
+	public Iterator<T> iterator() {
+		final MyHashTable<K, T> hashTable= this;
+	    return new Iterator<T>() {
+	        final NodeH<K,T> firstNode = hash[0];
+	        final int size= hash.length;
+	        NodeH<K,T> currentNode = null;
+	        @Override
+	        public boolean hasNext() {
+	            if (size==0||currentNode.equals(hash[size-1])) {
+	                return false;
+	            } else {
+	            	return true;
+	            }
+	        }
+	        @Override
+	        public T next() {
+	            if (size()==0){
+	                throw new NoSuchElementException("Lista vacia");
+	            } else if (currentNode == null){
+	                this.currentNode = firstNode;
+	                return currentNode.data;
+	            } else if (currentNode.nextNode == null) {
+	                throw new NoSuchElementException();
+	            }
+	            this.currentNode = currentNode.nextNode;
+	            return currentNode.data;
+	        }
+	    };
+	}
 	
 }
