@@ -5,7 +5,7 @@ import java.util.Iterator;
 public class MyHashTable<K, T> implements HashTable<K, T>, Iterable<T> {
 	NodeH<K, T>[] aux;
 	NodeH<K, T>[] hash;
-	int cantElementos=0;
+	int cantElementos = 0;
 
 	public MyHashTable(int arrayLenght) {
 
@@ -154,33 +154,33 @@ public class MyHashTable<K, T> implements HashTable<K, T>, Iterable<T> {
 	}
 
 	public int size() {
-		
+
 		return hash.length;
-		
+
 	}
-	
+
 	public int getCantElementos() {
 		return cantElementos;
 	}
 
 	public Iterator<T> iterator() {
-		Iterator<T> iterator= new Iterator<T>() {
-			private int indexActual=0;
-			private int elementos= 1;
-			
+		Iterator<T> iterator = new Iterator<T>() {
+			private int indexActual = 0;
+			private int elementos = 1;
+
 			@Override
 			public boolean hasNext() {
-				return elementos <  cantElementos;
+				return elementos < cantElementos;
 			}
-			
+
 			@Override
 			public T next() {
-				 do{
+				do {
 					indexActual++;
-				}while(hash[indexActual]==null);
-				elementos++;
-				T valorDelNodo= hash[indexActual].getValor();
-				
+				} while (hash[indexActual] == null);
+					elementos++;
+					T valorDelNodo = hash[indexActual].getValor();
+
 				return valorDelNodo;
 			}
 		};
