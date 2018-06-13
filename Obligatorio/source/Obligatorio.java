@@ -37,8 +37,10 @@ public class Obligatorio {
 		if(status.equals("HABILITADO")){
 			marcas.obtener(marca+pais).addProductoDeLaMarca(producto.getIdProduct() + producto.getName() + producto.getNroHab());
 		}
+		if(status.equals("HABILITADO")){
 		paises.obtener(pais)
 				.agregarProductosPorPais(producto.getIdProduct() + producto.getName() + producto.getNroHab());
+		}
 	}
 
 	public void reporte20EmpresasConMasProductosHabilitados() {
@@ -78,6 +80,28 @@ public class Obligatorio {
 					+ reporte2[(reporte2.length) - j].getProductoDeLaMarca().size() + " "+ reporte2[(reporte2.length) - j].getPais()) ;
 		}
 
+	}
+	
+	public void reporte10PaisesConMasProductosHabilitados() {
+		
+		int i = 0;
+		Iterator<Pais> itr = paises.iterator();
+		Pais[] reporte3 = new Pais[(paises.getCantElementos()) - 1];
+		while (itr.hasNext()) {
+			Pais pais = itr.next();
+			reporte3[i] = pais;
+
+			i++;
+
+		}
+		AlgoritmoOrdenamiento<Pais> quicksort = new MyQuickSort<>();
+		reporte3 = quicksort.order(reporte3);
+		for (int j = 1; j < 11; j++) {
+			System.out.println(reporte3[(reporte3.length) - j].getName() + " "
+					+ reporte3[(reporte3.length) - j].getProductosPorPais().size() + " "+ (100*(reporte3[(reporte3.length) - j].getProductosPorPais().size()))/reporte3.length) ;
+		}
+		
+		
 	}
 
 }

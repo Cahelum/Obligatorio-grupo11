@@ -31,5 +31,12 @@ public class TestObligatorio {
 		LeerCsv.lectura(obligatorio);
 		obligatorio.reporte10MarcasConMasProductosHabilitados();
 	}
+	@Test
+	public void testReporte3() {
+		System.out.println("--------------------------------------------------------");
+		Obligatorio obligatorio=new Obligatorio();
+		LeerCsv.lectura(obligatorio);
+		obligatorio.reporte10PaisesConMasProductosHabilitados();
+	}
 
 }

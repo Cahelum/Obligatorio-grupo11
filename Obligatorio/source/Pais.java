@@ -3,7 +3,7 @@ package source;
 import java.util.HashMap;
 import nodoSimple.MyLinkedList;
 
-public class Pais {
+public class Pais implements Comparable<Pais> {
 
     private String name;
     
@@ -73,6 +73,20 @@ public class Pais {
 		}
 		
 		return resultado;
+	}
+	@Override
+	public int compareTo(Pais o) {
+		Integer este = Integer.valueOf(this.getProductosPorPais().size());
+		Integer otro = Integer.valueOf(o.getProductosPorPais().size());
+		int resultado = 0;
+		if (este.compareTo(otro) == 1) {
+			resultado = 1;
+		} else if (este.compareTo(otro) == -1) {
+			resultado = -1;
+		}
+
+		return resultado;
+
 	}
 	
 }
