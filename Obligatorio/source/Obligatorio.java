@@ -112,7 +112,9 @@ public class Obligatorio {
 		int i = 0;
 		Iterator<Clase> itr = clases.iterator();
 		Clase[] reporte4 = new Clase[(marcas.getCantElementos()) - 1];
+		System.out.println("++++++++++++++++++++"+((marcas.getCantElementos()) - 1));
 		while (itr.hasNext()) {
+			System.out.println("++++++++++++++++++++"+((marcas.getCantElementos()) - 1));
 			Clase clase = itr.next();
 			reporte4[i] = clase;
 

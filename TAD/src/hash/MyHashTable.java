@@ -165,7 +165,7 @@ public class MyHashTable<K, T> implements HashTable<K, T>, Iterable<T> {
 
 	public Iterator<T> iterator() {
 		Iterator<T> iterator = new Iterator<T>() {
-			private int indexActual = 0;
+			private int indexActual = -1;
 			private int elementos = 1;
 
 			@Override
@@ -176,9 +176,12 @@ public class MyHashTable<K, T> implements HashTable<K, T>, Iterable<T> {
 			@Override
 			public T next() {
 				do {
+					System.out.println("cantElementos"+cantElementos);
 					indexActual++;
+					System.out.println("indexActual"+indexActual);
 				} while (hash[indexActual] == null);
 					elementos++;
+					System.out.println("Elementos"+ elementos);
 					T valorDelNodo = hash[indexActual].getValor();
 
 				return valorDelNodo;
