@@ -15,11 +15,6 @@ public class TestObligatorio {
 	}
 
 	@Test
-	public void testCrearProducto() {
-		fail("Not yet implemented"); // TODO
-	}
-
-	@Test
 	public void testLectura() {
 		Obligatorio obligatorio=new Obligatorio();
 		LeerCsv.lectura(obligatorio);
@@ -29,6 +24,12 @@ public class TestObligatorio {
 		Obligatorio obligatorio=new Obligatorio();
 		LeerCsv.lectura(obligatorio);
 		obligatorio.reporte20EmpresasConMasProductosHabilitados();
+	}
+	@Test
+	public void testReporte2() {
+		Obligatorio obligatorio=new Obligatorio();
+		LeerCsv.lectura(obligatorio);
+		obligatorio.reporte10MarcasConMasProductosHabilitados();
 	}
 
 }
