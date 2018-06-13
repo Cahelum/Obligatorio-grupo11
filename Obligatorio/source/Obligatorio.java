@@ -9,7 +9,7 @@ import ordenamiento.MyQuickSort;
 public class Obligatorio {
 
 	private HashTable<String, Pais> paises = new MyHashTable<>(100);
-	private HashTable<String, Clase> clases = new MyHashTable<>(1000);
+	private HashTable<String, Clase> clases = new MyHashTable<>(7000);
 	private HashTable<String, Marca> marcas = new MyHashTable<>(10000);
 	private HashTable<String, Empresa> empresas = new MyHashTable<>(10000);
 	private HashTable<String, Rubro> rubros = new MyHashTable<>(11);
@@ -73,7 +73,7 @@ public class Obligatorio {
 		while (itr.hasNext()) {
 			Marca marca = itr.next();
 			reporte2[i] = marca;
-
+           
 			i++;
 
 		}
@@ -111,16 +111,20 @@ public class Obligatorio {
 	public void reporte20ClasesConMasProductosHabilitados() {
 		int i = 0;
 		Iterator<Clase> itr = clases.iterator();
-		Clase[] reporte4 = new Clase[(marcas.getCantElementos()) - 1];
-		System.out.println("++++++++++++++++++++"+((marcas.getCantElementos()) - 1));
+		Clase[] reporte4 = new Clase[(clases.getCantElementos())-1];
+		
+		
+		
 		while (itr.hasNext()) {
-			System.out.println("++++++++++++++++++++"+((marcas.getCantElementos()) - 1));
+		
 			Clase clase = itr.next();
 			reporte4[i] = clase;
 
 			i++;
-
-		}
+	
+			}
+		
+		
 		AlgoritmoOrdenamiento<Clase> quicksort = new MyQuickSort<>();
 		reporte4 = quicksort.order(reporte4);
 		for (int j = 1; j < 11; j++) {

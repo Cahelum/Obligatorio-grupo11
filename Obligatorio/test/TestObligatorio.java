@@ -24,6 +24,7 @@ public class TestObligatorio {
 
 	@Test
 	public void testReporte1() throws IOException {
+		System.out.println("--------------------------------------------------------");
 		Obligatorio obligatorio = new Obligatorio();
 		LeerCsv.lectura(obligatorio);
 		obligatorio.reporte20EmpresasConMasProductosHabilitados();
@@ -31,6 +32,7 @@ public class TestObligatorio {
 
 	@Test
 	public void testReporte2() throws IOException {
+		System.out.println("--------------------------------------------------------");
 		Obligatorio obligatorio = new Obligatorio();
 		LeerCsv.lectura(obligatorio);
 		obligatorio.reporte10MarcasConMasProductosHabilitados();
@@ -46,6 +48,7 @@ public class TestObligatorio {
 
 	@Test
 	public void testReporte4() throws IOException {
+		System.out.println("--------------------------------------------------------");
 		Obligatorio obligatorio = new Obligatorio();
 		LeerCsv.lectura(obligatorio);
 		obligatorio.reporte20ClasesConMasProductosHabilitados();
