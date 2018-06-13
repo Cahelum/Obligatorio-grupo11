@@ -82,11 +82,26 @@ public class Empresa implements Comparable<Empresa>{
 		return resultado;
 	}
 
-	@Override
+	/*@Override
 	public int compareTo(Empresa o) {
 		Integer este = Integer.valueOf(this.getProductosDeLaEmpresa().size());
 		Integer otro=Integer.valueOf(o.getProductosDeLaEmpresa().size());
 		return este.compareTo(otro);
+	
+	}*/
+	
+	@Override
+	public int compareTo(Empresa o) {
+		Integer este = Integer.valueOf(this.getProductosDeLaEmpresa().size());
+		Integer otro=Integer.valueOf(o.getProductosDeLaEmpresa().size());
+		int resultado=0;
+		if(este.compareTo(otro)==1) {
+			resultado=1;
+		}else if(este.compareTo(otro)==-1) {
+			resultado=-1;
+		}
+		
+		return resultado;
 	
 	}
 	

@@ -15,7 +15,7 @@ public class MyQuickSort<T extends Comparable<T>> implements AlgoritmoOrdenamien
 			int i = start - 1;
 
 			for (int x = start; x < finish; x++) {
-
+                
 				if (pivot.compareTo(myList[x]) == 1) {
 					i = i + 1;
 					T menor = myList[x];

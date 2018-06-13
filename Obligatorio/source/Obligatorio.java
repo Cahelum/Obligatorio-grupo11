@@ -43,15 +43,27 @@ public class Obligatorio {
 	public void reporte20EmpresasConMasProductosHabilitados(){
 		int i=0;
 		Iterator<Empresa> itr = empresas.iterator();
-		Empresa[] reporte1= new Empresa[empresas.getCantElementos()];
+		Empresa[] reporte1= new Empresa[(empresas.getCantElementos())-1];
 		while(itr.hasNext()) {
 	         Empresa empresa = itr.next();
 	         reporte1[i]=empresa;
-	         i=i++;
+	         System.out.println(reporte1[i].getName());
+	         i++;
+	        
 	         }
+		        
+		   
+		
+		
 		AlgoritmoOrdenamiento<Empresa> quicksort= new MyQuickSort<>();
 		reporte1= quicksort.order(reporte1);
-		System.out.println(reporte1[0].getName());
+		System.out.println(reporte1[0].getName()+" "+reporte1[0].getProductosDeLaEmpresa().size());
+		System.out.println(reporte1[1].getName()+" "+reporte1[1].getProductosDeLaEmpresa().size());
+		System.out.println(reporte1[2].getName()+" "+reporte1[2].getProductosDeLaEmpresa().size());
+		System.out.println(reporte1[3].getName()+" "+reporte1[3].getProductosDeLaEmpresa().size());
+		System.out.println(reporte1[4].getName()+" "+reporte1[4].getProductosDeLaEmpresa().size());
+		System.out.println(reporte1[5].getName()+" "+reporte1[5].getProductosDeLaEmpresa().size());
+		
 	}
 	
 }

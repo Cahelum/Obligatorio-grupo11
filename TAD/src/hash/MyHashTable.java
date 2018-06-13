@@ -154,7 +154,9 @@ public class MyHashTable<K, T> implements HashTable<K, T>, Iterable<T> {
 	}
 
 	public int size() {
+		
 		return hash.length;
+		
 	}
 	
 	public int getCantElementos() {
@@ -173,9 +175,9 @@ public class MyHashTable<K, T> implements HashTable<K, T>, Iterable<T> {
 			
 			@Override
 			public T next() {
-				while(hash[indexActual]==null) {
+				 do{
 					indexActual++;
-				}
+				}while(hash[indexActual]==null);
 				elementos++;
 				T valorDelNodo= hash[indexActual].getValor();
 				
