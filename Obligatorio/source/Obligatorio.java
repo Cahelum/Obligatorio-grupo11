@@ -14,25 +14,26 @@ public class Obligatorio {
 	private HashTable<String, Empresa> empresas = new MyHashTable<>(10000);
 	private HashTable<String, Rubro> rubros = new MyHashTable<>(11);
 	private HashTable<String, Producto> productos = new MyHashTable<>(70000);
-
+	private int contadorProductosHabilitados=0;
+	
 	public void crearProductoSoloStrings(String name, String fantasyName, String status, String idProduct, String clase,
 			String pais, String marca, String empresa, String ruc, String rubro, String nroHab) {
-
 		int idProduct2 = Integer.parseInt(idProduct);
-		clases.insertarFaltante(clase, new Clase(clase));
+		clases.insertarFaltante(clase+pais, new Clase(clase,pais));
 		paises.insertarFaltante(pais, new Pais(pais));
 		marcas.insertarFaltante(marca+pais, new Marca(marca, pais));
 		empresas.insertarFaltante(empresa, new Empresa(empresa, ruc));
 		rubros.insertarFaltante(rubro, new Rubro(rubro));
 
-		Producto producto = new Producto(name, fantasyName, status, idProduct2, clases.obtener(clase),
-				paises.obtener(pais), marcas.obtener(marca), empresas.obtener(empresa), rubros.obtener(rubro), nroHab);
+		Producto producto = new Producto(name, fantasyName, status, idProduct2, clases.obtener(clase+pais),
+				paises.obtener(pais), marcas.obtener(marca+pais), empresas.obtener(empresa), rubros.obtener(rubro), nroHab);
 
 		productos.insertarFaltante(producto.getIdProduct() + producto.getName(), producto);
 		
 		if (status.equals("HABILITADO")) {
 			empresas.obtener(empresa)
 					.addProductoDeLaEmpresa(producto.getIdProduct() + producto.getName() + producto.getNroHab());
+			contadorProductosHabilitados= contadorProductosHabilitados+1;
 		}
 		if(status.equals("HABILITADO")){
 			marcas.obtener(marca+pais).addProductoDeLaMarca(producto.getIdProduct() + producto.getName() + producto.getNroHab());
@@ -41,6 +42,9 @@ public class Obligatorio {
 		paises.obtener(pais)
 				.agregarProductosPorPais(producto.getIdProduct() + producto.getName() + producto.getNroHab());
 		}
+		if(status.equals("HABILITADO")){
+			clases.obtener(clase+pais).addProductoDeLaClase(producto.getIdProduct() + producto.getName() + producto.getNroHab());
+			}
 	}
 
 	public void reporte20EmpresasConMasProductosHabilitados() {
@@ -98,10 +102,30 @@ public class Obligatorio {
 		reporte3 = quicksort.order(reporte3);
 		for (int j = 1; j < 11; j++) {
 			System.out.println(reporte3[(reporte3.length) - j].getName() + " "
-					+ reporte3[(reporte3.length) - j].getProductosPorPais().size() + " "+ (100*(reporte3[(reporte3.length) - j].getProductosPorPais().size()))/reporte3.length) ;
+					+ reporte3[(reporte3.length) - j].getProductosPorPais().size() + " "+ 100*reporte3[(reporte3.length) - j].getProductosPorPais().size()/contadorProductosHabilitados) ;
 		}
 		
 		
+	}
+	
+	public void reporte20ClasesConMasProductosHabilitados() {
+		int i = 0;
+		Iterator<Clase> itr = clases.iterator();
+		Clase[] reporte4 = new Clase[(marcas.getCantElementos()) - 1];
+		while (itr.hasNext()) {
+			Clase clase = itr.next();
+			reporte4[i] = clase;
+
+			i++;
+
+		}
+		AlgoritmoOrdenamiento<Clase> quicksort = new MyQuickSort<>();
+		reporte4 = quicksort.order(reporte4);
+		for (int j = 1; j < 11; j++) {
+			System.out.println(reporte4[(reporte4.length) - j].getName() + " "
+					+ reporte4[(reporte4.length) - j].getProductoDeLaClase().size() + " "+ reporte4[(reporte4.length) - j].getPais()) ;
+		}
+
 	}
 
 }

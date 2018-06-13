@@ -2,6 +2,8 @@ package test;
 
 import static org.junit.Assert.*;
 
+import java.io.IOException;
+
 import org.junit.Test;
 
 import source.LeerCsv;
@@ -15,28 +17,37 @@ public class TestObligatorio {
 	}
 
 	@Test
-	public void testLectura() {
-		Obligatorio obligatorio=new Obligatorio();
+	public void testLectura() throws IOException {
+		Obligatorio obligatorio = new Obligatorio();
 		LeerCsv.lectura(obligatorio);
 	}
+
 	@Test
-	public void testReporte1() {
-		Obligatorio obligatorio=new Obligatorio();
+	public void testReporte1() throws IOException {
+		Obligatorio obligatorio = new Obligatorio();
 		LeerCsv.lectura(obligatorio);
 		obligatorio.reporte20EmpresasConMasProductosHabilitados();
 	}
+
 	@Test
-	public void testReporte2() {
-		Obligatorio obligatorio=new Obligatorio();
+	public void testReporte2() throws IOException {
+		Obligatorio obligatorio = new Obligatorio();
 		LeerCsv.lectura(obligatorio);
 		obligatorio.reporte10MarcasConMasProductosHabilitados();
 	}
+
 	@Test
-	public void testReporte3() {
+	public void testReporte3() throws IOException {
 		System.out.println("--------------------------------------------------------");
-		Obligatorio obligatorio=new Obligatorio();
+		Obligatorio obligatorio = new Obligatorio();
 		LeerCsv.lectura(obligatorio);
 		obligatorio.reporte10PaisesConMasProductosHabilitados();
 	}
 
+	@Test
+	public void testReporte4() throws IOException {
+		Obligatorio obligatorio = new Obligatorio();
+		LeerCsv.lectura(obligatorio);
+		obligatorio.reporte20ClasesConMasProductosHabilitados();
+	}
 }
