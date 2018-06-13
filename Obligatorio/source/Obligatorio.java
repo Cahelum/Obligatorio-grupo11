@@ -31,7 +31,7 @@ public class Obligatorio {
 				marcas.obtener(marca), empresas.obtener(empresa), rubros.obtener(rubro), nroHab);
 
 		productos.insertarFaltante(producto.getIdProduct() + producto.getName(), producto);
-		if(status=="HABILITADO") {
+		if(status.equals("HABILITADO")) {
 			empresas.obtener(empresa).addProductoDeLaEmpresa(producto.getIdProduct() + producto.getName()+producto.getNroHab());
 		}
 		marcas.obtener(marca).addProductoDeLaMarca(producto.getIdProduct() + producto.getName()+producto.getNroHab());
@@ -47,7 +47,7 @@ public class Obligatorio {
 		while(itr.hasNext()) {
 	         Empresa empresa = itr.next();
 	         reporte1[i]=empresa;
-	         System.out.println(reporte1[i].getName());
+	         
 	         i++;
 	        
 	         }
@@ -57,12 +57,12 @@ public class Obligatorio {
 		
 		AlgoritmoOrdenamiento<Empresa> quicksort= new MyQuickSort<>();
 		reporte1= quicksort.order(reporte1);
-		System.out.println(reporte1[0].getName()+" "+reporte1[0].getProductosDeLaEmpresa().size());
-		System.out.println(reporte1[1].getName()+" "+reporte1[1].getProductosDeLaEmpresa().size());
-		System.out.println(reporte1[2].getName()+" "+reporte1[2].getProductosDeLaEmpresa().size());
-		System.out.println(reporte1[3].getName()+" "+reporte1[3].getProductosDeLaEmpresa().size());
-		System.out.println(reporte1[4].getName()+" "+reporte1[4].getProductosDeLaEmpresa().size());
-		System.out.println(reporte1[5].getName()+" "+reporte1[5].getProductosDeLaEmpresa().size());
+		for (int j = 1; j < 21; j++) {
+			System.out.println(reporte1[(reporte1.length)-j].getName()+" "+reporte1[(reporte1.length)-j].getProductosDeLaEmpresa().size());
+		}
+		
+		
+		
 		
 	}
 	
