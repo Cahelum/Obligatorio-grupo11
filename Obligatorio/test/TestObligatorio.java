@@ -4,53 +4,53 @@ import static org.junit.Assert.*;
 
 import java.io.IOException;
 
+import org.junit.Before;
+import org.junit.BeforeClass;
 import org.junit.Test;
-
-import source.LeerCsv;
 import source.Obligatorio;
 
 public class TestObligatorio {
-
-	@Test
-	public void testCrearProductoSoloStrings() {
-		fail("Not yet implemented"); // TODO
-	}
-
-	@Test
+	
+	private Obligatorio obligatorio= new Obligatorio();
+	
+	@Before
 	public void testLectura() throws IOException {
-		Obligatorio obligatorio = new Obligatorio();
-		LeerCsv.lectura(obligatorio);
+		obligatorio = new Obligatorio();
+		obligatorio.lectura();
 	}
-
 	@Test
 	public void testReporte1() throws IOException {
-		System.out.println("--------------------------------------------------------");
-		Obligatorio obligatorio = new Obligatorio();
-		LeerCsv.lectura(obligatorio);
+		long startTime = System.nanoTime();
 		obligatorio.reporte20EmpresasConMasProductosHabilitados();
+		long endTime = System.nanoTime();
+		long duration = (endTime - startTime); 
+		System.out.println(duration/1000000);
 	}
 
 	@Test
 	public void testReporte2() throws IOException {
-		System.out.println("--------------------------------------------------------");
-		Obligatorio obligatorio = new Obligatorio();
-		LeerCsv.lectura(obligatorio);
+		long startTime = System.nanoTime();
 		obligatorio.reporte10MarcasConMasProductosHabilitados();
+		long endTime = System.nanoTime();
+		long duration = (endTime - startTime); 
+		System.out.println(duration/1000000);
 	}
 
 	@Test
 	public void testReporte3() throws IOException {
-		System.out.println("--------------------------------------------------------");
-		Obligatorio obligatorio = new Obligatorio();
-		LeerCsv.lectura(obligatorio);
+		long startTime = System.nanoTime();
 		obligatorio.reporte10PaisesConMasProductosHabilitados();
+		long endTime = System.nanoTime();
+		long duration = (endTime - startTime); 
+		System.out.println(duration/1000000);
 	}
 
 	@Test
 	public void testReporte4() throws IOException {
-		System.out.println("--------------------------------------------------------");
-		Obligatorio obligatorio = new Obligatorio();
-		LeerCsv.lectura(obligatorio);
+		long startTime = System.nanoTime();
 		obligatorio.reporte20ClasesConMasProductosHabilitados();
+		long endTime = System.nanoTime();
+		long duration = (endTime - startTime); 
+		System.out.println(duration/1000000);
 	}
 }

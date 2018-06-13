@@ -1,6 +1,13 @@
 package source;
 
+import java.io.File;
+import java.io.IOException;
+import java.nio.charset.StandardCharsets;
 import java.util.Iterator;
+
+import de.siegmar.fastcsv.reader.CsvContainer;
+import de.siegmar.fastcsv.reader.CsvReader;
+import de.siegmar.fastcsv.reader.CsvRow;
 import hash.HashTable;
 import hash.MyHashTable;
 import ordenamiento.AlgoritmoOrdenamiento;
@@ -47,6 +54,33 @@ public class Obligatorio {
 			}
 	}
 
+	public void lectura() throws IOException {
+		File file = new File("v_producto_real_updated.csv");
+		CsvReader csvReader = new CsvReader();
+		csvReader.setFieldSeparator(';');
+		csvReader.setContainsHeader(true);
+		CsvContainer csv;
+			csv = csvReader.read(file, StandardCharsets.UTF_8);
+			for (CsvRow row : csv.getRows()) {
+				
+				String nombreProducto = row.getField("nombre"); 
+				String nombreDeFantasia= row.getField("nom_fantasia"); 
+				String idProduct = row.getField("idprod"); 
+				String rubro = row.getField("rubro"); 
+				String nroHab = row.getField("nro_hab");
+				String empresa = row.getField("empresa"); 
+				String clase = row.getField("clase"); 
+				String marca = row.getField("marca");
+				String pais= row.getField("pais"); 
+				String status = row.getField("estado");
+				String ruc = row.getField("ruc");
+				
+				crearProductoSoloStrings(nombreProducto, nombreDeFantasia, status, idProduct, clase, pais, marca, empresa, ruc, rubro, nroHab);
+			}
+		
+		
+	}
+	
 	public void reporte20EmpresasConMasProductosHabilitados() {
 		int i = 0;
 		Iterator<Empresa> itr = empresas.iterator();
