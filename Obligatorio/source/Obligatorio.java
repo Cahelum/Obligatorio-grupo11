@@ -96,7 +96,8 @@ public class Obligatorio {
 		}
 		if (status.equals("HABILITADO")) {
 			clases.obtener(clase + pais)
-					.addProductoDeLaClase(producto.getIdProduct() + producto.getName() + producto.getNroHab());
+					.addProductoDeLaClase(producto.getIdProduct() 
+							+ producto.getName() + producto.getNroHab());
 		}
 	}
 
@@ -206,7 +207,7 @@ public class Obligatorio {
 
 		AlgoritmoOrdenamiento<Clase> quicksort = new MyQuickSort<>();
 		reporte4 = quicksort.order(reporte4);
-		for (int j = 1; j < 11; j++) {
+		for (int j = 1; j < 21; j++) {
 			System.out.println("-Clase: "+reporte4[(reporte4.length) - j].getName() + " -Cantidad de productos: "
 					+ reporte4[(reporte4.length) - j].getProductoDeLaClase().size() + " -Pais de origen: "
 					+ reporte4[(reporte4.length) - j].getPais());
