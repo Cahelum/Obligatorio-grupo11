@@ -29,7 +29,7 @@ public class MyHashTable<K, T> implements HashTable<K, T>, Iterable<T> {
 			coord = FuncionColicion(coord);
 
 		}
-
+		
 		cantElementos++;
 		hash[coord] = nodo;
 
@@ -37,28 +37,22 @@ public class MyHashTable<K, T> implements HashTable<K, T>, Iterable<T> {
 		double auxHashL = hash.length;
 
 		if (auxCantElementos / auxHashL > 0.8) {
-			// System.out.println(auxCantElementos / auxHashL+"indice de ocupacion
-			// ------"+cantElementos);
-			// System.out.println("agrando"+hash.length+"inicio");
+		
+			aux = new NodeH[(int) (hash.length*1.5)];
 
-			aux = new NodeH[(hash.length)];
-
-			for (int c = 0; c < aux.length; c++) {
-
-				aux[c] = hash[c];
-			}
-
-			hash = new NodeH[(int) (hash.length * 1.5)];
-
-			for (int c = 0; c < aux.length; c++) {
-
-				if (aux[c] != null) {
-					int newCoord = Math.abs(aux[c].getClave().hashCode()) % hash.length;
-					hash[newCoord] = aux[c];
+			for (int c = 0; c < hash.length; c++) {
+				
+				if (hash[c] != null) {
+					int newCoord = Math.abs(hash[c].getClave().hashCode()) % aux.length;
+					 aux[newCoord] =hash[c];
 				}
 
 			}
-			// System.out.println("agrando"+hash.length+"final");
+
+			hash = aux;
+
+			
+			
 
 		}
 
@@ -170,17 +164,14 @@ public class MyHashTable<K, T> implements HashTable<K, T>, Iterable<T> {
             
 			@Override
 			public boolean hasNext() {
+			
 				return elementos < cantElementos;
 			}
 
 			@Override
 			public T next() {
 				do {
-					
-					//System.out.println(hash.length+" largo del hash"+" cantidad elementos"+cantElementos+" elementos: "+elementos);
-					
 					indexActual++;
-					//System.out.println("indexActual"+indexActual);
 				} while (hash[indexActual] == null);
 					elementos++;
 					

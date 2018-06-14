@@ -16,7 +16,7 @@ import ordenamiento.MyQuickSort;
 public class Obligatorio {
 
 	private HashTable<String, Pais> paises = new MyHashTable<>(100);
-	private HashTable<String, Clase> clases = new MyHashTable<>(7000);
+	private HashTable<String, Clase> clases = new MyHashTable<>(1000);
 	private HashTable<String, Marca> marcas = new MyHashTable<>(10000);
 	private HashTable<String, Empresa> empresas = new MyHashTable<>(10000);
 	private HashTable<String, Rubro> rubros = new MyHashTable<>(11);

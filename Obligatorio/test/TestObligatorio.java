@@ -20,6 +20,7 @@ public class TestObligatorio {
 	}
 	@Test
 	public void testReporte1() throws IOException {
+		System.out.println("--------------------------------------------------");
 		long startTime = System.nanoTime();
 		obligatorio.reporte20EmpresasConMasProductosHabilitados();
 		long endTime = System.nanoTime();
@@ -29,6 +30,7 @@ public class TestObligatorio {
 
 	@Test
 	public void testReporte2() throws IOException {
+		System.out.println("--------------------------------------------------");
 		long startTime = System.nanoTime();
 		obligatorio.reporte10MarcasConMasProductosHabilitados();
 		long endTime = System.nanoTime();
@@ -38,6 +40,7 @@ public class TestObligatorio {
 
 	@Test
 	public void testReporte3() throws IOException {
+		System.out.println("--------------------------------------------------");
 		long startTime = System.nanoTime();
 		obligatorio.reporte10PaisesConMasProductosHabilitados();
 		long endTime = System.nanoTime();
@@ -47,6 +50,7 @@ public class TestObligatorio {
 
 	@Test
 	public void testReporte4() throws IOException {
+		System.out.println("--------------------------------------------------");
 		long startTime = System.nanoTime();
 		obligatorio.reporte20ClasesConMasProductosHabilitados();
 		long endTime = System.nanoTime();
