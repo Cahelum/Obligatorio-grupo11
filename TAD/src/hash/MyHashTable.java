@@ -17,8 +17,7 @@ public class MyHashTable<K, T> implements HashTable<K, T>, Iterable<T> {
 
 		int coord = 1;
 		coord = Math.abs(clave.hashCode()) % hash.length;
-		NodeH nodo = new NodeH<K, T>(clave, valor, false);
-		int cont = coord;
+		NodeH<K, T> nodo = new NodeH<K, T>(clave, valor, false);
 
 		while (hash[coord] != null && hash[coord].getEliminado() == false) {
 			if (hash[coord].getClave().equals(clave) && hash[coord].getEliminado() == false) {
@@ -29,7 +28,7 @@ public class MyHashTable<K, T> implements HashTable<K, T>, Iterable<T> {
 			coord = FuncionColicion(coord);
 
 		}
-		
+
 		cantElementos++;
 		hash[coord] = nodo;
 
@@ -37,22 +36,19 @@ public class MyHashTable<K, T> implements HashTable<K, T>, Iterable<T> {
 		double auxHashL = hash.length;
 
 		if (auxCantElementos / auxHashL > 0.8) {
-		
-			aux = new NodeH[(int) (hash.length*1.5)];
+
+			aux = new NodeH[(int) (hash.length * 1.5)];
 
 			for (int c = 0; c < hash.length; c++) {
-				
+
 				if (hash[c] != null) {
 					int newCoord = Math.abs(hash[c].getClave().hashCode()) % aux.length;
-					 aux[newCoord] =hash[c];
+					aux[newCoord] = hash[c];
 				}
 
 			}
 
 			hash = aux;
-
-			
-			
 
 		}
 
@@ -157,30 +153,30 @@ public class MyHashTable<K, T> implements HashTable<K, T>, Iterable<T> {
 		return cantElementos;
 	}
 
-	public Iterator<T> iterator() {
-		Iterator<T> iterator = new Iterator<T>() {
-			private int indexActual = -1;
-			private int elementos = 1;
-            
-			@Override
-			public boolean hasNext() {
-			
-				return elementos < cantElementos;
-			}
-
-			@Override
-			public T next() {
-				do {
+ 	public Iterator<T> iterator() {
+ 		Iterator<T> iterator = new Iterator<T>() {
+ 			private int indexActual = -1;
+ 			private int elementos = 1;
+             
+ 			@Override
+ 			public boolean hasNext() {			
+ 				return elementos < cantElementos;
+ 			}
+ 
+ 			@Override
+ 			public T next() {
+ 				do {
 					indexActual++;
-				} while (hash[indexActual] == null);
-					elementos++;
-					
-					T valorDelNodo = hash[indexActual].getValor();
-
-				return valorDelNodo;
-			}
-		};
-		return iterator;
-	}
+				} while (hash[indexActual] == null||hash[indexActual].eliminado);
+ 					elementos++;
+ 					
+ 					T valorDelNodo = hash[indexActual].getValor();
+ 
+ 				return valorDelNodo;
+ 			}
+ 		};
+ 		return iterator;
+ 	}
+	
 
 }

@@ -7,12 +7,10 @@ public class Producto {
 	private String fantasyName;
 
 	private String status;
-	
+
 	private String nroHab;
 
 	private int idProduct;
-
-	private Rubro rubro;
 
 	private Pais pais;
 
@@ -22,9 +20,13 @@ public class Producto {
 
 	private Clase clase;
 
+	private boolean exp;
+
+	private boolean elab;
+
 	public Producto(String name, String fantasyName, String status, int idProduct, Clase clase, Pais pais, Marca marca,
-			Empresa empresa, Rubro rubro, String nroHab) {
-		
+			Empresa empresa, boolean exp, boolean elab, String nroHab) {
+
 		this.name = name;
 		this.fantasyName = fantasyName;
 		this.status = status;
@@ -33,8 +35,9 @@ public class Producto {
 		this.pais = pais;
 		this.marca = marca;
 		this.empresa = empresa;
-		this.rubro = rubro;
-		this.nroHab=nroHab;
+		this.exp = exp;
+		this.elab = elab;
+		this.nroHab = nroHab;
 	}
 
 	public String getName() {
@@ -77,12 +80,22 @@ public class Producto {
 		this.nroHab = nroHab;
 	}
 
-	public Rubro getRubro() {
-		return rubro;
+	public String getRubro() {
+		if (elab == true & exp == true) {
+			return "expendedor-elaborador";
+		} else if (elab == false & exp == true) {
+			return "expendedor";
+		} else {
+			return "elaborador";
+		}
+	}
+	
+	public void setExp(boolean exp) {
+		this.exp = exp;
 	}
 
-	public void setRubro(Rubro rubro) {
-		this.rubro = rubro;
+	public void setElab(boolean elab) {
+		this.elab = elab;
 	}
 
 	public Pais getPais() {

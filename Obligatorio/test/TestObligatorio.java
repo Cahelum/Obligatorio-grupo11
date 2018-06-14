@@ -21,7 +21,7 @@ public class TestObligatorio {
 	@Test
 	public void testReporte1() throws IOException {
 		System.out.println("--------------------------------------------------");
-		long startTime = System.nanoTime();
+		long startTime = System.nanoTime(); 
 		obligatorio.reporte20EmpresasConMasProductosHabilitados();
 		long endTime = System.nanoTime();
 		long duration = (endTime - startTime); 

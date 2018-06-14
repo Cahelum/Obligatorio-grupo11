@@ -17,25 +17,67 @@ import ordenamiento.MyQuickSort;
 public class Obligatorio {
 
 	private HashTable<String, Pais> paises = new MyHashTable<>(100);
-	private HashTable<String, Clase> clases = new MyHashTable<>(1000);
+	private HashTable<String, Clase> clases = new MyHashTable<>(10000);
 	private HashTable<String, Marca> marcas = new MyHashTable<>(10000);
 	private HashTable<String, Empresa> empresas = new MyHashTable<>(10000);
-	private HashTable<String, Rubro> rubros = new MyHashTable<>(11);
 	private HashTable<String, Producto> productos = new MyHashTable<>(70000);
 	private int contadorProductosHabilitados = 0;
 
 	public void crearProductoSoloStrings(String name, String fantasyName, String status, String idProduct, String clase,
 			String pais, String marca, String empresa, String ruc, String rubro, String nroHab) {
 		int idProduct2 = Integer.parseInt(idProduct);
-		clases.insertarFaltante(clase + pais, new Clase(clase, pais));
-		paises.insertarFaltante(pais, new Pais(pais));
-		marcas.insertarFaltante(marca + pais, new Marca(marca, pais));
-		empresas.insertarFaltante(empresa, new Empresa(empresa, ruc));
-		rubros.insertarFaltante(rubro, new Rubro(rubro));
 
-		Producto producto = new Producto(name, fantasyName, status, idProduct2, clases.obtener(clase + pais),
-				paises.obtener(pais), marcas.obtener(marca + pais), empresas.obtener(empresa), rubros.obtener(rubro),
-				nroHab);
+		Empresa oEmpresa;
+		if (empresas.pertenece(empresa)) {
+			oEmpresa = empresas.obtener(empresa);
+		} else {
+			oEmpresa = new Empresa(empresa, ruc);
+			empresas.insertarFaltante(empresa, oEmpresa);
+		}
+
+		Clase oClase;
+		if (clases.pertenece(clase)) {
+			oClase = clases.obtener(clase);
+		} else {
+			oClase = new Clase(clase, pais);
+			clases.insertarFaltante(clase + pais, oClase);
+		}
+
+		Pais oPais;
+		if (paises.pertenece(pais)) {
+			oPais = paises.obtener(pais);
+		} else {
+			oPais = new Pais(pais);
+			paises.insertarFaltante(pais, oPais);
+		}
+
+		Marca oMarca;
+		if (marcas.pertenece(marca)) {
+			oMarca = marcas.obtener(marca);
+		} else {
+			oMarca = new Marca(marca, pais);
+			marcas.insertarFaltante(marca + pais, oMarca);
+		}
+
+		boolean exp = false;
+		boolean elab = false;
+		// Se podría utilizar enum
+		switch (rubro) {
+		case "Exp-elab":
+			exp = true;
+			elab = true;
+		case "Elab":
+			exp = false;
+			elab = true;
+			break;
+		case "Exp":
+			exp = true;
+			elab = false;
+			break;
+		}
+
+		Producto producto = new Producto(name, fantasyName, status, idProduct2, oClase, oPais, oMarca, oEmpresa, exp,
+				elab, nroHab);
 
 		productos.insertarFaltante(producto.getIdProduct() + producto.getName(), producto);
 
@@ -99,7 +141,7 @@ public class Obligatorio {
 		AlgoritmoOrdenamiento<Empresa> quicksort = new MyQuickSort<>();
 		reporte1 = quicksort.order(reporte1);
 		for (int j = 1; j < 21; j++) {
-			System.out.println(reporte1[(reporte1.length) - j].getName() + " "
+			System.out.println("-Empresa: "+ reporte1[(reporte1.length) - j].getName() + " -Cantidad de productos: "
 					+ reporte1[(reporte1.length) - j].getProductosDeLaEmpresa().size());
 		}
 	}
@@ -118,8 +160,8 @@ public class Obligatorio {
 		AlgoritmoOrdenamiento<Marca> quicksort = new MyQuickSort<>();
 		reporte2 = quicksort.order(reporte2);
 		for (int j = 1; j < 11; j++) {
-			System.out.println(reporte2[(reporte2.length) - j].getName() + " "
-					+ reporte2[(reporte2.length) - j].getProductoDeLaMarca().size() + " "
+			System.out.println("-Marca: "+reporte2[(reporte2.length) - j].getName() + " -Cantidad de productos: "
+					+ reporte2[(reporte2.length) - j].getProductoDeLaMarca().size() + " -País de origen: "
 					+ reporte2[(reporte2.length) - j].getPais());
 		}
 
@@ -140,10 +182,10 @@ public class Obligatorio {
 		AlgoritmoOrdenamiento<Pais> quicksort = new MyQuickSort<>();
 		reporte3 = quicksort.order(reporte3);
 		for (int j = 1; j < 11; j++) {
-			System.out.println(reporte3[(reporte3.length) - j].getName() + " "
-					+ reporte3[(reporte3.length) - j].getProductosPorPais().size() + " "
+			System.out.println("-Pais: "+reporte3[(reporte3.length) - j].getName() + " -Cantidad de productos: "
+					+ reporte3[(reporte3.length) - j].getProductosPorPais().size() + " -Porcentaje del total: "
 					+ 100 * reporte3[(reporte3.length) - j].getProductosPorPais().size()
-							/ contadorProductosHabilitados);
+							/ contadorProductosHabilitados+"%");
 		}
 
 	}
@@ -165,14 +207,14 @@ public class Obligatorio {
 		AlgoritmoOrdenamiento<Clase> quicksort = new MyQuickSort<>();
 		reporte4 = quicksort.order(reporte4);
 		for (int j = 1; j < 11; j++) {
-			System.out.println(reporte4[(reporte4.length) - j].getName() + " "
-					+ reporte4[(reporte4.length) - j].getProductoDeLaClase().size() + " "
+			System.out.println("-Clase: "+reporte4[(reporte4.length) - j].getName() + " -Cantidad de productos: "
+					+ reporte4[(reporte4.length) - j].getProductoDeLaClase().size() + " -Pais de origen: "
 					+ reporte4[(reporte4.length) - j].getPais());
 		}
 
 	}
 
-	public void elegirReporte() {
+	public boolean elegirReporte() {
 		Scanner sc = new Scanner(System.in);
 		String pedido;
 		do {
@@ -182,22 +224,51 @@ public class Obligatorio {
 			System.out.println("4- Listar las 20 clases por país que tienen mayor cantidad de productos habilitados.");
 			System.out.println("Elija escribiendo '1', '2', '3' o '4'.");
 			pedido = sc.nextLine();
-		} while (!pedido.equals("1") || !pedido.equals("2") || !pedido.equals("3") || !pedido.equals("4"));
+		} while (!pedido.equals("1") && !pedido.equals("2") && !pedido.equals("3") && !pedido.equals("4"));
+		
+		long startTime=0;
+		long endTime=0;
+		long duration=0;
 		switch (pedido) {
 		case "1":
+			startTime= System.nanoTime();
+			
 			reporte20EmpresasConMasProductosHabilitados();
+			
+			endTime = System.nanoTime();									//Medición de tiempo en cada caso para evitar error
+			duration = (endTime - startTime); 
+			System.out.println("Demoró " +duration/1000000+" milisegundos.");
 			break;
 		case "2":
+			startTime= System.nanoTime();
+			
 			reporte10MarcasConMasProductosHabilitados();
+			
+			endTime = System.nanoTime();
+			duration = (endTime - startTime); 
+			System.out.println("Demoró " +duration/1000000+" milisegundos.");
 			break;
 		case "3":
+			startTime= System.nanoTime();
+			
 			reporte10PaisesConMasProductosHabilitados();
+			
+			endTime = System.nanoTime();
+			duration = (endTime - startTime); 
+			System.out.println("Demoró " +duration/1000000+" milisegundos.");
 			break;
 		case "4":
+			startTime= System.nanoTime();
+			
 			reporte20ClasesConMasProductosHabilitados();
-			break;
-
+			
+			endTime = System.nanoTime();
+			duration = (endTime - startTime); 
+			System.out.println("Demoró " +duration/1000000+" milisegundos.");
+			break;	
 		}
-		sc.close();
+		
+		
+		return true;
 	}
 }
