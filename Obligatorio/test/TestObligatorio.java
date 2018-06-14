@@ -16,7 +16,7 @@ public class TestObligatorio {
 	@Before
 	public void testLectura() throws IOException {
 		obligatorio = new Obligatorio();
-		obligatorio.lectura();
+		obligatorio.lectura("v_producto_real_updated.csv");
 	}
 	@Test
 	public void testReporte1() throws IOException {

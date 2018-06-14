@@ -4,6 +4,7 @@ import java.io.File;
 import java.io.IOException;
 import java.nio.charset.StandardCharsets;
 import java.util.Iterator;
+import java.util.Scanner;
 
 import de.siegmar.fastcsv.reader.CsvContainer;
 import de.siegmar.fastcsv.reader.CsvReader;
@@ -21,66 +22,69 @@ public class Obligatorio {
 	private HashTable<String, Empresa> empresas = new MyHashTable<>(10000);
 	private HashTable<String, Rubro> rubros = new MyHashTable<>(11);
 	private HashTable<String, Producto> productos = new MyHashTable<>(70000);
-	private int contadorProductosHabilitados=0;
-	
+	private int contadorProductosHabilitados = 0;
+
 	public void crearProductoSoloStrings(String name, String fantasyName, String status, String idProduct, String clase,
 			String pais, String marca, String empresa, String ruc, String rubro, String nroHab) {
 		int idProduct2 = Integer.parseInt(idProduct);
-		clases.insertarFaltante(clase+pais, new Clase(clase,pais));
+		clases.insertarFaltante(clase + pais, new Clase(clase, pais));
 		paises.insertarFaltante(pais, new Pais(pais));
-		marcas.insertarFaltante(marca+pais, new Marca(marca, pais));
+		marcas.insertarFaltante(marca + pais, new Marca(marca, pais));
 		empresas.insertarFaltante(empresa, new Empresa(empresa, ruc));
 		rubros.insertarFaltante(rubro, new Rubro(rubro));
 
-		Producto producto = new Producto(name, fantasyName, status, idProduct2, clases.obtener(clase+pais),
-				paises.obtener(pais), marcas.obtener(marca+pais), empresas.obtener(empresa), rubros.obtener(rubro), nroHab);
+		Producto producto = new Producto(name, fantasyName, status, idProduct2, clases.obtener(clase + pais),
+				paises.obtener(pais), marcas.obtener(marca + pais), empresas.obtener(empresa), rubros.obtener(rubro),
+				nroHab);
 
 		productos.insertarFaltante(producto.getIdProduct() + producto.getName(), producto);
-		
+
 		if (status.equals("HABILITADO")) {
 			empresas.obtener(empresa)
 					.addProductoDeLaEmpresa(producto.getIdProduct() + producto.getName() + producto.getNroHab());
-			contadorProductosHabilitados= contadorProductosHabilitados+1;
+			contadorProductosHabilitados = contadorProductosHabilitados + 1;
 		}
-		if(status.equals("HABILITADO")){
-			marcas.obtener(marca+pais).addProductoDeLaMarca(producto.getIdProduct() + producto.getName() + producto.getNroHab());
+		if (status.equals("HABILITADO")) {
+			marcas.obtener(marca + pais)
+					.addProductoDeLaMarca(producto.getIdProduct() + producto.getName() + producto.getNroHab());
 		}
-		if(status.equals("HABILITADO")){
-		paises.obtener(pais)
-				.agregarProductosPorPais(producto.getIdProduct() + producto.getName() + producto.getNroHab());
+		if (status.equals("HABILITADO")) {
+			paises.obtener(pais)
+					.agregarProductosPorPais(producto.getIdProduct() + producto.getName() + producto.getNroHab());
 		}
-		if(status.equals("HABILITADO")){
-			clases.obtener(clase+pais).addProductoDeLaClase(producto.getIdProduct() + producto.getName() + producto.getNroHab());
-			}
+		if (status.equals("HABILITADO")) {
+			clases.obtener(clase + pais)
+					.addProductoDeLaClase(producto.getIdProduct() + producto.getName() + producto.getNroHab());
+		}
 	}
 
-	public void lectura() throws IOException {
-		File file = new File("v_producto_real_updated.csv");
+	public void lectura(String path) throws IOException {
+		File file = new File(path);
 		CsvReader csvReader = new CsvReader();
 		csvReader.setFieldSeparator(';');
 		csvReader.setContainsHeader(true);
 		CsvContainer csv;
-			csv = csvReader.read(file, StandardCharsets.UTF_8);
-			for (CsvRow row : csv.getRows()) {
-				
-				String nombreProducto = row.getField("nombre"); 
-				String nombreDeFantasia= row.getField("nom_fantasia"); 
-				String idProduct = row.getField("idprod"); 
-				String rubro = row.getField("rubro"); 
-				String nroHab = row.getField("nro_hab");
-				String empresa = row.getField("empresa"); 
-				String clase = row.getField("clase"); 
-				String marca = row.getField("marca");
-				String pais= row.getField("pais"); 
-				String status = row.getField("estado");
-				String ruc = row.getField("ruc");
-				
-				crearProductoSoloStrings(nombreProducto, nombreDeFantasia, status, idProduct, clase, pais, marca, empresa, ruc, rubro, nroHab);
-			}
-		
-		
+		csv = csvReader.read(file, StandardCharsets.UTF_8);
+		for (CsvRow row : csv.getRows()) {
+
+			String nombreProducto = row.getField("nombre");
+			String nombreDeFantasia = row.getField("nom_fantasia");
+			String idProduct = row.getField("idprod");
+			String rubro = row.getField("rubro");
+			String nroHab = row.getField("nro_hab");
+			String empresa = row.getField("empresa");
+			String clase = row.getField("clase");
+			String marca = row.getField("marca");
+			String pais = row.getField("pais");
+			String status = row.getField("estado");
+			String ruc = row.getField("ruc");
+
+			crearProductoSoloStrings(nombreProducto, nombreDeFantasia, status, idProduct, clase, pais, marca, empresa,
+					ruc, rubro, nroHab);
+		}
+
 	}
-	
+
 	public void reporte20EmpresasConMasProductosHabilitados() {
 		int i = 0;
 		Iterator<Empresa> itr = empresas.iterator();
@@ -107,7 +111,7 @@ public class Obligatorio {
 		while (itr.hasNext()) {
 			Marca marca = itr.next();
 			reporte2[i] = marca;
-           
+
 			i++;
 
 		}
@@ -115,13 +119,14 @@ public class Obligatorio {
 		reporte2 = quicksort.order(reporte2);
 		for (int j = 1; j < 11; j++) {
 			System.out.println(reporte2[(reporte2.length) - j].getName() + " "
-					+ reporte2[(reporte2.length) - j].getProductoDeLaMarca().size() + " "+ reporte2[(reporte2.length) - j].getPais()) ;
+					+ reporte2[(reporte2.length) - j].getProductoDeLaMarca().size() + " "
+					+ reporte2[(reporte2.length) - j].getPais());
 		}
 
 	}
-	
+
 	public void reporte10PaisesConMasProductosHabilitados() {
-		
+
 		int i = 0;
 		Iterator<Pais> itr = paises.iterator();
 		Pais[] reporte3 = new Pais[(paises.getCantElementos()) - 1];
@@ -136,36 +141,63 @@ public class Obligatorio {
 		reporte3 = quicksort.order(reporte3);
 		for (int j = 1; j < 11; j++) {
 			System.out.println(reporte3[(reporte3.length) - j].getName() + " "
-					+ reporte3[(reporte3.length) - j].getProductosPorPais().size() + " "+ 100*reporte3[(reporte3.length) - j].getProductosPorPais().size()/contadorProductosHabilitados) ;
+					+ reporte3[(reporte3.length) - j].getProductosPorPais().size() + " "
+					+ 100 * reporte3[(reporte3.length) - j].getProductosPorPais().size()
+							/ contadorProductosHabilitados);
 		}
-		
-		
+
 	}
-	
+
 	public void reporte20ClasesConMasProductosHabilitados() {
 		int i = 0;
 		Iterator<Clase> itr = clases.iterator();
-		Clase[] reporte4 = new Clase[(clases.getCantElementos())-1];
-		
-		
-		
+		Clase[] reporte4 = new Clase[(clases.getCantElementos()) - 1];
+
 		while (itr.hasNext()) {
-		
+
 			Clase clase = itr.next();
 			reporte4[i] = clase;
 
 			i++;
-	
-			}
-		
-		
+
+		}
+
 		AlgoritmoOrdenamiento<Clase> quicksort = new MyQuickSort<>();
 		reporte4 = quicksort.order(reporte4);
 		for (int j = 1; j < 11; j++) {
 			System.out.println(reporte4[(reporte4.length) - j].getName() + " "
-					+ reporte4[(reporte4.length) - j].getProductoDeLaClase().size() + " "+ reporte4[(reporte4.length) - j].getPais()) ;
+					+ reporte4[(reporte4.length) - j].getProductoDeLaClase().size() + " "
+					+ reporte4[(reporte4.length) - j].getPais());
 		}
 
 	}
 
+	public void elegirReporte() {
+		Scanner sc = new Scanner(System.in);
+		String pedido;
+		do {
+			System.out.println("1- Listar las 20 empresas que disponen de mayor cantidad de productos habilitados.");
+			System.out.println("2- Listar las 10 marcas por país que tienen mayor cantidad de productos habilitados.");
+			System.out.println("3- Listar los 10 países que disponen la mayor cantidad de productos habilitados.");
+			System.out.println("4- Listar las 20 clases por país que tienen mayor cantidad de productos habilitados.");
+			System.out.println("Elija escribiendo '1', '2', '3' o '4'.");
+			pedido = sc.nextLine();
+		} while (!pedido.equals("1") || !pedido.equals("2") || !pedido.equals("3") || !pedido.equals("4"));
+		switch (pedido) {
+		case "1":
+			reporte20EmpresasConMasProductosHabilitados();
+			break;
+		case "2":
+			reporte10MarcasConMasProductosHabilitados();
+			break;
+		case "3":
+			reporte10PaisesConMasProductosHabilitados();
+			break;
+		case "4":
+			reporte20ClasesConMasProductosHabilitados();
+			break;
+
+		}
+		sc.close();
+	}
 }

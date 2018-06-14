@@ -1,60 +1,44 @@
 package source;
 
-import java.util.Scanner;
+import java.io.IOException;
+import source.UIUtilities;
 
 public class UI {
 
 	public static void main(String[] args) {
-		String opcion;
-     do {
-		opcion=pedirString("ingrese alguna de la siguientes opciones:");
-		
-		switch(opcion){
-        case "1":
-           
-            break;
-        case "2":
-          
-            break;
-        case "3":
-            
-            break;
-        case "4":
-            
-            break;
-        }
-     }while (!opcion.equals("0"));
-		
-		
-		
-    }
-		
+		Obligatorio obligatorio = new Obligatorio();
 
-	
-	
-	
-	
-	public static String pedirString(String letra){
-		
-		
-		
-	    Scanner sc= new Scanner(System.in);
-	    String pedido;
-	    do{
-	        System.out.println(letra);
-	        System.out.println("1 - listar las 20 empresas con mayor cantidad de productos habilitados");
-			System.out.println("2 - lists la 10 marcas por pais que tienen mas productos habilitados");
-			System.out.println("3 - listar los 10 paises con mayor cantidad de productos habilitados");
-			System.out.println("4 - listar las 20 clases por pais que tienen mayor cantidad de productos habilitados");
-			System.out.println("0 - para salir(precione otra tecla para mostrara nuevamente el mensaje)");
-	        pedido=sc.nextLine();
-	        
-	    } while(pedido.isEmpty());
-	    
-	    
-	    return pedido;
+		String start = "Hola Daniel";
+		boolean reporte = false;
+		while (!start.equals("start")) {
+			start = UIUtilities.pedirString("Escriba 'start' para cargar archivo CSV básico");
+		}
+		System.out.println("Cargando archivo CSV, espere por favor");
+		try {
+			obligatorio.lectura("v_producto_real_updated.csv");
+		} catch (IOException e) {
+			System.out.println("Error en la lectura, consulte con el administrador del sistema para solucionarlo.");
+		}
+		while (true) {
+			reporte = UIUtilities.siONo("¿Desea realizar un reporte? (Responda con 'si' o 'no')");
+			if (reporte) {
+				boolean eleccionReporte = false;
+				while (eleccionReporte == false) {
+					obligatorio.elegirReporte();
+				}
+			} else {
+				boolean cargarCSV = UIUtilities.siONo("¿Desea cargar otro archivo CSV del mismo formato?");
+				if (cargarCSV) {
+					String file = UIUtilities
+							.pedirString("Escriba la dirección del archivo CSV (Favor de verificar compatibilidad)");
+					try {
+						System.out.println("Cargando nuevo archivo CSV, espere por favor.");
+						obligatorio.lectura(file);
+					} catch (IOException e) {
+						System.out.println("Error en la lectura, verifique ubicación/compatibilidad.");
+					}
+				}
+			}
+		}
 	}
-	
-	
-
 }
