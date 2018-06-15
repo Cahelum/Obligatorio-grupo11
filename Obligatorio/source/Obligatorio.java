@@ -62,34 +62,32 @@ public class Obligatorio {
 		Rubro oRubro;
 		if (rubro.equals("Exp")) {
 			oRubro = Rubro.EXPENDEDOR;
-		} else if(rubro.equals("Elab")){
+		} else if (rubro.equals("Elab")) {
 			oRubro = Rubro.ELABORADOR;
-		}else {
+		} else {
 			oRubro = Rubro.EXPENDEDOR_ELABORADOR;
-		
+
 		}
 
-		Producto producto = new Producto(name, fantasyName, status, idProduct2, oClase, oPais, oMarca, oEmpresa, oRubro, nroHab);
+		Producto producto = new Producto(name, fantasyName, status, idProduct2, oClase, oPais, oMarca, oEmpresa, oRubro,
+				nroHab);
 
 		productos.insertarFaltante(producto.getIdProduct() + producto.getName(), producto);
 
 		if (status.equals("HABILITADO")) {
 			empresas.obtener(empresa)
 					.addProductoDeLaEmpresa(producto.getIdProduct() + producto.getName() + producto.getNroHab());
-			contadorProductosHabilitados = contadorProductosHabilitados + 1;
-		}
-		if (status.equals("HABILITADO")) {
+
 			marcas.obtener(marca + pais)
 					.addProductoDeLaMarca(producto.getIdProduct() + producto.getName() + producto.getNroHab());
-		}
-		if (status.equals("HABILITADO")) {
+
 			paises.obtener(pais)
 					.agregarProductosPorPais(producto.getIdProduct() + producto.getName() + producto.getNroHab());
-		}
-		if (status.equals("HABILITADO")) {
+
 			clases.obtener(clase + pais)
-					.addProductoDeLaClase(producto.getIdProduct() 
-							+ producto.getName() + producto.getNroHab());
+					.addProductoDeLaClase(producto.getIdProduct() + producto.getName() + producto.getNroHab());
+
+			contadorProductosHabilitados = contadorProductosHabilitados + 1;
 		}
 	}
 
@@ -101,7 +99,7 @@ public class Obligatorio {
 		CsvContainer csv;
 		csv = csvReader.read(file, StandardCharsets.UTF_8);
 		for (CsvRow row : csv.getRows()) {
-			
+
 			String nombreProducto = row.getField(0);
 			String nombreDeFantasia = row.getField(1);
 			String idProduct = row.getField(2);
@@ -110,8 +108,8 @@ public class Obligatorio {
 			String empresa = row.getField(5);
 			String clase = row.getField(10);
 			String marca = row.getField(12);
-			if(marca.contains("  ")) {
-				marca=marca.replace("  ", " ");
+			if (marca.contains("  ")) {
+				marca = marca.replace("  ", " ");
 			}
 			String pais = row.getField(13);
 			String status = row.getField(20);
@@ -137,7 +135,7 @@ public class Obligatorio {
 		AlgoritmoOrdenamiento<Empresa> quicksort = new MyQuickSort<>();
 		reporte1 = quicksort.order(reporte1);
 		for (int j = 1; j < 21; j++) {
-			System.out.println("-Empresa: "+ reporte1[(reporte1.length) - j].getName() + " -Cantidad de productos: "
+			System.out.println("-Empresa: " + reporte1[(reporte1.length) - j].getName() + " -Cantidad de productos: "
 					+ reporte1[(reporte1.length) - j].getProductosDeLaEmpresa().size());
 		}
 	}
@@ -156,7 +154,7 @@ public class Obligatorio {
 		AlgoritmoOrdenamiento<Marca> quicksort = new MyQuickSort<>();
 		reporte2 = quicksort.order(reporte2);
 		for (int j = 1; j < 11; j++) {
-			System.out.println("-Marca: "+reporte2[(reporte2.length) - j].getName() + " -Cantidad de productos: "
+			System.out.println("-Marca: " + reporte2[(reporte2.length) - j].getName() + " -Cantidad de productos: "
 					+ reporte2[(reporte2.length) - j].getProductoDeLaMarca().size() + " -País de origen: "
 					+ reporte2[(reporte2.length) - j].getPais());
 		}
@@ -178,10 +176,10 @@ public class Obligatorio {
 		AlgoritmoOrdenamiento<Pais> quicksort = new MyQuickSort<>();
 		reporte3 = quicksort.order(reporte3);
 		for (int j = 1; j < 11; j++) {
-			System.out.println("-Pais: "+reporte3[(reporte3.length) - j].getName() + " -Cantidad de productos: "
+			System.out.println("-Pais: " + reporte3[(reporte3.length) - j].getName() + " -Cantidad de productos: "
 					+ reporte3[(reporte3.length) - j].getProductosPorPais().size() + " -Porcentaje del total: "
-					+ 100 * reporte3[(reporte3.length) - j].getProductosPorPais().size()
-							/ contadorProductosHabilitados+"%");
+					+ 100 * reporte3[(reporte3.length) - j].getProductosPorPais().size() / contadorProductosHabilitados
+					+ "%");
 		}
 
 	}
@@ -203,7 +201,7 @@ public class Obligatorio {
 		AlgoritmoOrdenamiento<Clase> quicksort = new MyQuickSort<>();
 		reporte4 = quicksort.order(reporte4);
 		for (int j = 1; j < 21; j++) {
-			System.out.println("-Clase: "+reporte4[(reporte4.length) - j].getName() + " -Cantidad de productos: "
+			System.out.println("-Clase: " + reporte4[(reporte4.length) - j].getName() + " -Cantidad de productos: "
 					+ reporte4[(reporte4.length) - j].getProductoDeLaClase().size() + " -Pais de origen: "
 					+ reporte4[(reporte4.length) - j].getPais());
 		}
@@ -221,50 +219,49 @@ public class Obligatorio {
 			System.out.println("Elija escribiendo '1', '2', '3' o '4'.");
 			pedido = sc.nextLine();
 		} while (!pedido.equals("1") && !pedido.equals("2") && !pedido.equals("3") && !pedido.equals("4"));
-		
-		long startTime=0;
-		long endTime=0;
-		long duration=0;
+
+		long startTime = 0;
+		long endTime = 0;
+		long duration = 0;
 		switch (pedido) {
 		case "1":
-			startTime= System.nanoTime();
-			
+			startTime = System.nanoTime();
+
 			reporte20EmpresasConMasProductosHabilitados();
-			
-			endTime = System.nanoTime();									//Medición de tiempo en cada caso para evitar error
-			duration = (endTime - startTime); 
-			System.out.println("Demoró " +duration/1000000+" milisegundos.");
+
+			endTime = System.nanoTime(); // Medición de tiempo en cada caso para evitar error
+			duration = (endTime - startTime);
+			System.out.println("Demoró " + duration / 1000000 + " milisegundos.");
 			break;
 		case "2":
-			startTime= System.nanoTime();
-			
+			startTime = System.nanoTime();
+
 			reporte10MarcasConMasProductosHabilitados();
-			
+
 			endTime = System.nanoTime();
-			duration = (endTime - startTime); 
-			System.out.println("Demoró " +duration/1000000+" milisegundos.");
+			duration = (endTime - startTime);
+			System.out.println("Demoró " + duration / 1000000 + " milisegundos.");
 			break;
 		case "3":
-			startTime= System.nanoTime();
-			
+			startTime = System.nanoTime();
+
 			reporte10PaisesConMasProductosHabilitados();
-			
+
 			endTime = System.nanoTime();
-			duration = (endTime - startTime); 
-			System.out.println("Demoró " +duration/1000000+" milisegundos.");
+			duration = (endTime - startTime);
+			System.out.println("Demoró " + duration / 1000000 + " milisegundos.");
 			break;
 		case "4":
-			startTime= System.nanoTime();
-			
+			startTime = System.nanoTime();
+
 			reporte20ClasesConMasProductosHabilitados();
-			
+
 			endTime = System.nanoTime();
-			duration = (endTime - startTime); 
-			System.out.println("Demoró " +duration/1000000+" milisegundos.");
-			break;	
+			duration = (endTime - startTime);
+			System.out.println("Demoró " + duration / 1000000 + " milisegundos.");
+			break;
 		}
-		
-		
+
 		return true;
 	}
 }
