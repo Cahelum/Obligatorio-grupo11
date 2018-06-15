@@ -10,6 +10,7 @@ public class MyHashTable<K, T> implements HashTable<K, T>, Iterable<T> {
 	public MyHashTable(int arrayLenght) {
 
 		hash = new NodeH[arrayLenght];
+		
 		size=arrayLenght;
 		
 	}
@@ -70,9 +71,10 @@ public class MyHashTable<K, T> implements HashTable<K, T>, Iterable<T> {
 
 			}
 
-			hash = aux;
-			size=size*2;
+			
 		}
+		hash = aux;
+		size=size*2;
 	}
 
 	public boolean pertenece(K clave) {
@@ -80,6 +82,7 @@ public class MyHashTable<K, T> implements HashTable<K, T>, Iterable<T> {
 		boolean resultado = false;
 
 		int coord = Math.abs(clave.hashCode()) % size;
+		;
 
 		while (hash[coord] != null && coord < size && resultado == false) {
 
@@ -90,6 +93,22 @@ public class MyHashTable<K, T> implements HashTable<K, T>, Iterable<T> {
 			}
 			coord = FuncionColicion(coord);
 
+		}
+		if(coord>=size) {
+			coord=0;
+			int myAux=clave.hashCode();
+			while(coord<myAux && resultado==false && hash[coord]!=null) {
+				
+				if (hash[coord].getClave().equals(clave)) {
+
+					resultado = true;
+
+				}
+				coord = FuncionColicion(coord);
+				
+			}
+			
+			
 		}
 
 		return resultado;

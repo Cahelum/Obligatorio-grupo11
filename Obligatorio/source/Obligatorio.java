@@ -17,10 +17,10 @@ import ordenamiento.MyQuickSort;
 public class Obligatorio {
 
 	private HashTable<String, Pais> paises = new MyHashTable<>(100);
-	private HashTable<String, Clase> clases = new MyHashTable<>(1000);
-	private HashTable<String, Marca> marcas = new MyHashTable<>(1000);
-	private HashTable<String, Empresa> empresas = new MyHashTable<>(1000);
-	private HashTable<String, Producto> productos = new MyHashTable<>(7000);
+	private HashTable<String, Clase> clases = new MyHashTable<>(10000);
+	private HashTable<String, Marca> marcas = new MyHashTable<>(10000);
+	private HashTable<String, Empresa> empresas = new MyHashTable<>(10000);
+	private HashTable<String, Producto> productos = new MyHashTable<>(70000);
 	private int contadorProductosHabilitados = 0;
 
 	public void crearProductoSoloStrings(String name, String fantasyName, String status, String idProduct, String clase,
@@ -36,8 +36,8 @@ public class Obligatorio {
 		}
 
 		Clase oClase;
-		if (clases.pertenece(clase)) {
-			oClase = clases.obtener(clase);
+		if (clases.pertenece(clase + pais)) {
+			oClase = clases.obtener(clase +pais);
 		} else {
 			oClase = new Clase(clase, pais);
 			clases.insertarFaltante(clase + pais, oClase);
@@ -52,8 +52,8 @@ public class Obligatorio {
 		}
 
 		Marca oMarca;
-		if (marcas.pertenece(marca)) {
-			oMarca = marcas.obtener(marca);
+		if (marcas.pertenece(marca + pais)) {
+			oMarca = marcas.obtener(marca + pais);
 		} else {
 			oMarca = new Marca(marca, pais);
 			marcas.insertarFaltante(marca + pais, oMarca);
@@ -77,7 +77,7 @@ public class Obligatorio {
 		if (status.equals("HABILITADO")) {
 			empresas.obtener(empresa)
 					.addProductoDeLaEmpresa(producto.getIdProduct() + producto.getName() + producto.getNroHab());
-
+         
 			marcas.obtener(marca + pais)
 					.addProductoDeLaMarca(producto.getIdProduct() + producto.getName() + producto.getNroHab());
 
