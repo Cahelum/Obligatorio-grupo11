@@ -59,25 +59,17 @@ public class Obligatorio {
 			marcas.insertarFaltante(marca + pais, oMarca);
 		}
 
-		boolean exp = false;
-		boolean elab = false;
-		// Se podría utilizar enum
-		switch (rubro) {
-		case "Exp-elab":
-			exp = true;
-			elab = true;
-		case "Elab":
-			exp = false;
-			elab = true;
-			break;
-		case "Exp":
-			exp = true;
-			elab = false;
-			break;
+		Rubro oRubro;
+		if (rubro.equals("Exp")) {
+			oRubro = Rubro.EXPENDEDOR;
+		} else if(rubro.equals("Elab")){
+			oRubro = Rubro.ELABORADOR;
+		}else {
+			oRubro = Rubro.EXPENDEDOR_ELABORADOR;
+		
 		}
 
-		Producto producto = new Producto(name, fantasyName, status, idProduct2, oClase, oPais, oMarca, oEmpresa, exp,
-				elab, nroHab);
+		Producto producto = new Producto(name, fantasyName, status, idProduct2, oClase, oPais, oMarca, oEmpresa, oRubro, nroHab);
 
 		productos.insertarFaltante(producto.getIdProduct() + producto.getName(), producto);
 

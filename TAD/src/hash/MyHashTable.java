@@ -3,7 +3,6 @@ package hash;
 import java.util.Iterator;
 
 public class MyHashTable<K, T> implements HashTable<K, T>, Iterable<T> {
-	NodeH<K, T>[] aux;
 	NodeH<K, T>[] hash;
 	int cantElementos = 0;
 
@@ -14,7 +13,7 @@ public class MyHashTable<K, T> implements HashTable<K, T>, Iterable<T> {
 	}
 
 	public void insertar(K clave, T valor) throws ElementoYaExistenteException {
-      //  System.out.println(cantElementos+"inicio insertar"); 
+		// System.out.println(cantElementos+"inicio insertar");
 		int coord = 1;
 		coord = Math.abs(clave.hashCode()) % hash.length;
 		NodeH<K, T> nodo = new NodeH<K, T>(clave, valor, false);
@@ -28,36 +27,46 @@ public class MyHashTable<K, T> implements HashTable<K, T>, Iterable<T> {
 			coord = FuncionColicion(coord);
 
 		}
-		//System.out.println(cantElementos+"antes de suma");
+		// System.out.println(cantElementos+"antes de suma");
 		cantElementos++;
-		//System.out.println(cantElementos+"Despues de suma");
-		
+		// System.out.println(cantElementos+"Despues de suma");
+
 		hash[coord] = nodo;
 
 		double auxCantElementos = cantElementos;
 		double auxHashL = hash.length;
 		if (auxCantElementos / auxHashL > 0.8) {
-			 agrandarHash();
+			agrandarHash();
 		}
-		 
 
 	}
-	
+
 	public void agrandarHash() {
-		
+		NodeH<K, T>[] aux;
+
 		aux = new NodeH[(int) (hash.length * 1.5)];
 
 		for (int c = 0; c < hash.length; c++) {
 
-			if (hash[c] != null) {
-				int newCoord = Math.abs(hash[c].getClave().hashCode()) % aux.length;
+			int newCoord = Math.abs(hash[c].getClave().hashCode()) % aux.length;
+
+			if (aux[newCoord] == null) {
 				aux[newCoord] = hash[c];
+			} else {
+
+				while (aux[newCoord] != null) {
+					if (newCoord == aux.length) {
+						newCoord = 0;
+					} else {
+						newCoord++;
+						
+					}
+				}
+				aux[newCoord] = hash[c];
+				
 			}
-
 		}
-
 		hash = aux;
-       
 	}
 
 	public boolean pertenece(K clave) {
@@ -159,32 +168,32 @@ public class MyHashTable<K, T> implements HashTable<K, T>, Iterable<T> {
 		return cantElementos;
 	}
 
- 	public Iterator<T> iterator() {
- 		
- 		Iterator<T> iterator = new Iterator<T>() {
- 			private int indexActual = -1;
- 			private int elementos = 1;
-             
- 			@Override
- 			public boolean hasNext() {	
- 				//System.out.println("elementos: "+elementos+" cant elementos: "+cantElementos+" hash length: "+hash.length);
- 				return elementos < cantElementos;
- 			}
- 
- 			@Override
- 			public T next() {
- 				do {
+	public Iterator<T> iterator() {
+
+		Iterator<T> iterator = new Iterator<T>() {
+			private int indexActual = -1;
+			private int elementos = 1;
+
+			@Override
+			public boolean hasNext() {
+				// System.out.println("elementos: "+elementos+" cant elementos:
+				// "+cantElementos+" hash length: "+hash.length);
+				return elementos < cantElementos;
+			}
+
+			@Override
+			public T next() {
+				do {
 					indexActual++;
-				} while (hash[indexActual] == null||hash[indexActual].eliminado);
- 					elementos++;
- 					
- 					T valorDelNodo = hash[indexActual].getValor();
- 
- 				return valorDelNodo;
- 			}
- 		};
- 		return iterator;
- 	}
-	
+				} while (hash[indexActual] == null || hash[indexActual].eliminado);
+				elementos++;
+
+				T valorDelNodo = hash[indexActual].getValor();
+
+				return valorDelNodo;
+			}
+		};
+		return iterator;
+	}
 
 }
