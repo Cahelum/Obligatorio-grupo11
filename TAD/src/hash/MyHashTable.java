@@ -5,17 +5,19 @@ import java.util.Iterator;
 public class MyHashTable<K, T> implements HashTable<K, T>, Iterable<T> {
 	NodeH<K, T>[] hash;
 	int cantElementos = 0;
-
+	private int size;
+	
 	public MyHashTable(int arrayLenght) {
 
 		hash = new NodeH[arrayLenght];
-
+		size=arrayLenght;
+		
 	}
 
 	public void insertar(K clave, T valor) throws ElementoYaExistenteException {
 		// System.out.println(cantElementos+"inicio insertar");
 		int coord = 1;
-		coord = Math.abs(clave.hashCode()) % hash.length;
+		coord = Math.abs(clave.hashCode()) % size;
 		NodeH<K, T> nodo = new NodeH<K, T>(clave, valor, false);
 
 		while (hash[coord] != null && hash[coord].getEliminado() == false) {
@@ -34,7 +36,7 @@ public class MyHashTable<K, T> implements HashTable<K, T>, Iterable<T> {
 		hash[coord] = nodo;
 
 		double auxCantElementos = cantElementos;
-		double auxHashL = hash.length;
+		double auxHashL = size;
 		if (auxCantElementos / auxHashL > 0.8) {
 			agrandarHash();
 		}
@@ -44,38 +46,42 @@ public class MyHashTable<K, T> implements HashTable<K, T>, Iterable<T> {
 	public void agrandarHash() {
 		NodeH<K, T>[] aux;
 
-		aux = new NodeH[(int) (hash.length * 1.5)];
+		aux = new NodeH[(int) (size * 2)];
 
-		for (int c = 0; c < hash.length; c++) {
-
-			int newCoord = Math.abs(hash[c].getClave().hashCode()) % aux.length;
-
-			if (aux[newCoord] == null) {
-				aux[newCoord] = hash[c];
-			} else {
-
-				while (aux[newCoord] != null) {
-					if (newCoord == aux.length) {
-						newCoord = 0;
-					} else {
-						newCoord++;
-						
-					}
-				}
-				aux[newCoord] = hash[c];
+		for (int c = 0; c < size; c++) {
+			
+			if (hash[c] != null) {
+				int newCoord = Math.abs(hash[c].getClave().hashCode()) % size;
 				
+				if (aux[newCoord] == null) {
+					aux[newCoord] = hash[c];
+				} else {
+					int newCoord2=newCoord;
+					while (aux[newCoord] != null &&hash[newCoord].getEliminado()) {
+						if (newCoord >= size) {
+							newCoord = 0;
+						} else {
+							newCoord++;
+						}
+					}
+					aux[newCoord] = hash[c];
+				}
+				
+
 			}
+
+			hash = aux;
+			size=size*2;
 		}
-		hash = aux;
 	}
 
 	public boolean pertenece(K clave) {
 
 		boolean resultado = false;
 
-		int coord = Math.abs(clave.hashCode()) % hash.length;
+		int coord = Math.abs(clave.hashCode()) % size;
 
-		while (hash[coord] != null && coord < hash.length && resultado == false) {
+		while (hash[coord] != null && coord < size && resultado == false) {
 
 			if (hash[coord].getClave().equals(clave)) {
 
@@ -93,9 +99,9 @@ public class MyHashTable<K, T> implements HashTable<K, T>, Iterable<T> {
 
 		boolean resultado = false;
 
-		int coord = Math.abs(clave.hashCode()) % hash.length;
+		int coord = Math.abs(clave.hashCode()) % size;
 
-		while (hash[coord] != null && coord < hash.length && resultado == false) {
+		while (hash[coord] != null && coord < size && resultado == false) {
 
 			if (hash[coord].getClave().equals(clave)) {
 
@@ -115,7 +121,7 @@ public class MyHashTable<K, T> implements HashTable<K, T>, Iterable<T> {
 	public int FuncionColicion(int coord) {
 		int funcion = 0;
 
-		if (coord < hash.length - 1) {
+		if (coord < size - 1) {
 
 			funcion = coord + 1;
 		} else {
@@ -131,8 +137,8 @@ public class MyHashTable<K, T> implements HashTable<K, T>, Iterable<T> {
 		boolean resultado = false;
 		T res = null;
 
-		int coord = Math.abs(clave.hashCode()) % hash.length;
-		while (hash[coord] != null && coord < hash.length && resultado == false) {
+		int coord = Math.abs(clave.hashCode()) % size;
+		while (hash[coord] != null && coord < size && resultado == false) {
 			if (hash[coord].getClave().equals(clave) && hash[coord].getEliminado() == false) {
 				resultado = true;
 
@@ -160,7 +166,7 @@ public class MyHashTable<K, T> implements HashTable<K, T>, Iterable<T> {
 
 	public int size() {
 
-		return hash.length;
+		return size;
 
 	}
 
@@ -177,7 +183,7 @@ public class MyHashTable<K, T> implements HashTable<K, T>, Iterable<T> {
 			@Override
 			public boolean hasNext() {
 				// System.out.println("elementos: "+elementos+" cant elementos:
-				// "+cantElementos+" hash length: "+hash.length);
+				// "+cantElementos+" : "+size);
 				return elementos < cantElementos;
 			}
 

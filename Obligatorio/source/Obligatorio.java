@@ -17,10 +17,10 @@ import ordenamiento.MyQuickSort;
 public class Obligatorio {
 
 	private HashTable<String, Pais> paises = new MyHashTable<>(100);
-	private HashTable<String, Clase> clases = new MyHashTable<>(10000);
-	private HashTable<String, Marca> marcas = new MyHashTable<>(10000);
-	private HashTable<String, Empresa> empresas = new MyHashTable<>(10000);
-	private HashTable<String, Producto> productos = new MyHashTable<>(70000);
+	private HashTable<String, Clase> clases = new MyHashTable<>(1000);
+	private HashTable<String, Marca> marcas = new MyHashTable<>(1000);
+	private HashTable<String, Empresa> empresas = new MyHashTable<>(1000);
+	private HashTable<String, Producto> productos = new MyHashTable<>(7000);
 	private int contadorProductosHabilitados = 0;
 
 	public void crearProductoSoloStrings(String name, String fantasyName, String status, String idProduct, String clase,
