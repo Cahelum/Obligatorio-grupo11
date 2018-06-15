@@ -101,18 +101,21 @@ public class Obligatorio {
 		CsvContainer csv;
 		csv = csvReader.read(file, StandardCharsets.UTF_8);
 		for (CsvRow row : csv.getRows()) {
-
-			String nombreProducto = row.getField("nombre");
-			String nombreDeFantasia = row.getField("nom_fantasia");
-			String idProduct = row.getField("idprod");
-			String rubro = row.getField("rubro");
-			String nroHab = row.getField("nro_hab");
-			String empresa = row.getField("empresa");
-			String clase = row.getField("clase");
-			String marca = row.getField("marca");
-			String pais = row.getField("pais");
-			String status = row.getField("estado");
-			String ruc = row.getField("ruc");
+			
+			String nombreProducto = row.getField(0);
+			String nombreDeFantasia = row.getField(1);
+			String idProduct = row.getField(2);
+			String rubro = row.getField(3);
+			String nroHab = row.getField(4);
+			String empresa = row.getField(5);
+			String clase = row.getField(10);
+			String marca = row.getField(12);
+			if(marca.contains("  ")) {
+				marca=marca.replace("  ", " ");
+			}
+			String pais = row.getField(13);
+			String status = row.getField(20);
+			String ruc = row.getField(23);
 
 			crearProductoSoloStrings(nombreProducto, nombreDeFantasia, status, idProduct, clase, pais, marca, empresa,
 					ruc, rubro, nroHab);
