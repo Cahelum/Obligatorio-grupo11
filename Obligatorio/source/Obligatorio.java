@@ -155,7 +155,7 @@ public class Obligatorio {
 		reporte2 = quicksort.order(reporte2);
 		for (int j = 1; j < 11; j++) {
 			System.out.println("-Marca: " + reporte2[(reporte2.length) - j].getName() + " -Cantidad de productos: "
-					+ reporte2[(reporte2.length) - j].getProductoDeLaMarca().size() + " -País de origen: "
+					+ reporte2[(reporte2.length) - j].getProductoDeLaMarca().size() + " -Paï¿½s de origen: "
 					+ reporte2[(reporte2.length) - j].getPais());
 		}
 
@@ -213,9 +213,9 @@ public class Obligatorio {
 		String pedido;
 		do {
 			System.out.println("1- Listar las 20 empresas que disponen de mayor cantidad de productos habilitados.");
-			System.out.println("2- Listar las 10 marcas por país que tienen mayor cantidad de productos habilitados.");
-			System.out.println("3- Listar los 10 países que disponen la mayor cantidad de productos habilitados.");
-			System.out.println("4- Listar las 20 clases por país que tienen mayor cantidad de productos habilitados.");
+			System.out.println("2- Listar las 10 marcas por paï¿½s que tienen mayor cantidad de productos habilitados.");
+			System.out.println("3- Listar los 10 paï¿½ses que disponen la mayor cantidad de productos habilitados.");
+			System.out.println("4- Listar las 20 clases por paï¿½s que tienen mayor cantidad de productos habilitados.");
 			System.out.println("Elija escribiendo '1', '2', '3' o '4'.");
 			pedido = sc.nextLine();
 		} while (!pedido.equals("1") && !pedido.equals("2") && !pedido.equals("3") && !pedido.equals("4"));
@@ -223,42 +223,56 @@ public class Obligatorio {
 		long startTime = 0;
 		long endTime = 0;
 		long duration = 0;
+		long beforeUsedMem;
+		long afterUsedMem;
+		long actualUsedMem;
 		switch (pedido) {
 		case "1":
 			startTime = System.nanoTime();
-
+			beforeUsedMem = Runtime.getRuntime().totalMemory()-Runtime.getRuntime().freeMemory();
 			reporte20EmpresasConMasProductosHabilitados();
-
-			endTime = System.nanoTime(); // Medición de tiempo en cada caso para evitar error
+			afterUsedMem=Runtime.getRuntime().totalMemory()-Runtime.getRuntime().freeMemory();
+			endTime = System.nanoTime(); // Mediciï¿½n de tiempo en cada caso para evitar error
 			duration = (endTime - startTime);
-			System.out.println("Demoró " + duration / 1000000 + " milisegundos.");
+			actualUsedMem=afterUsedMem-beforeUsedMem; 
+			System.out.println("Demorï¿½ " + duration / 1000000 + " milisegundos.");
+			System.out.println("Memoria utilizada: "+ actualUsedMem/1000000 + "mb");
 			break;
+			
 		case "2":
 			startTime = System.nanoTime();
-
+			beforeUsedMem = Runtime.getRuntime().totalMemory()-Runtime.getRuntime().freeMemory();
 			reporte10MarcasConMasProductosHabilitados();
-
+			afterUsedMem=Runtime.getRuntime().totalMemory()-Runtime.getRuntime().freeMemory();
 			endTime = System.nanoTime();
 			duration = (endTime - startTime);
-			System.out.println("Demoró " + duration / 1000000 + " milisegundos.");
+			actualUsedMem=afterUsedMem-beforeUsedMem; 
+			System.out.println("Demorï¿½ " + duration / 1000000 + " milisegundos.");
+			System.out.println("Memoria utilizada: "+ actualUsedMem/1000000 + "mb");
 			break;
+			
 		case "3":
 			startTime = System.nanoTime();
-
+			beforeUsedMem = Runtime.getRuntime().totalMemory()-Runtime.getRuntime().freeMemory();
 			reporte10PaisesConMasProductosHabilitados();
-
+			afterUsedMem=Runtime.getRuntime().totalMemory()-Runtime.getRuntime().freeMemory();
 			endTime = System.nanoTime();
 			duration = (endTime - startTime);
-			System.out.println("Demoró " + duration / 1000000 + " milisegundos.");
+			actualUsedMem=afterUsedMem-beforeUsedMem;
+			System.out.println("Demorï¿½ " + duration / 1000000 + " milisegundos.");
+			System.out.println("Memoria utilizada: "+ actualUsedMem/1000000 + "mb");
 			break;
 		case "4":
+			
 			startTime = System.nanoTime();
-
+			beforeUsedMem = Runtime.getRuntime().totalMemory()-Runtime.getRuntime().freeMemory();
 			reporte20ClasesConMasProductosHabilitados();
-
+			afterUsedMem=Runtime.getRuntime().totalMemory()-Runtime.getRuntime().freeMemory();
 			endTime = System.nanoTime();
 			duration = (endTime - startTime);
-			System.out.println("Demoró " + duration / 1000000 + " milisegundos.");
+			actualUsedMem=afterUsedMem-beforeUsedMem;
+			System.out.println("Demorï¿½ " + duration / 1000000 + " milisegundos.");
+			System.out.println("Memoria utilizada: "+ actualUsedMem/1000000 + "mb");
 			break;
 		}
 
