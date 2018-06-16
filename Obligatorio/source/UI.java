@@ -33,15 +33,18 @@ public class UI {
 			} else {
 				boolean cargarCSV = UIUtilities.siONo("¿Desea cargar otro archivo CSV del mismo formato? (Responda con 'si' o 'no')");
 				boolean funcionaCarga=false;
-				while (cargarCSV&!funcionaCarga) {
+				while (cargarCSV&&!funcionaCarga) {
 					String file = UIUtilities
 							.pedirString("Escriba la dirección del archivo CSV (Favor de verificar compatibilidad)");
 					try {
 						System.out.println("Cargando nuevo archivo CSV, espere por favor.");
 						obligatorio.lectura(file);
+						funcionaCarga=true;
 					} catch (IOException e) {
 						System.out.println("Error en la lectura, verifique ubicación/compatibilidad.");
+						
 					}
+					
 				}
 			}
 		}
